@@ -1,1 +1,0 @@
---prefix=${HOME}/nvptx-elf/local --target=nvptx-unknown-elf --enable-as-accelerator-for=x86_64-pc-linux-gnu --disable-sjlj-exceptions --enable-newlib-io-long-long --with-ld=/home/ivladak/wip/build-nvptx-elf-gcc-gomp-nvptx-unknown-elf-nvptx-unknown-elf-libgomp/real-ld

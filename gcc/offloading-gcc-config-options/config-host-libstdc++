@@ -1,1 +1,0 @@
---disable-static --disable-decimal-float --disable-libgomp --disable-libmudflap --disable-nls --disable-multilib --enable-lto --enable-languages=c++,lto --prefix=${HOME}/local/trunk-unpatched --build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu --target=x86_64-pc-linux-gnu --disable-bootstrap --with-ld=/home/ivladak/src/tizen-plug/wrappers/ld

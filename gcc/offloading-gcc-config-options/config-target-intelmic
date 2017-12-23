@@ -1,1 +1,0 @@
---prefix=/home/ivladak/intelmic/local --disable-multilib --enable-languages=c,lto --build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu --target=x86_64-pc-linux-gnu --enable-offload-targets=x86_64-intelmicemul-linux-gnu --disable-bootstrap

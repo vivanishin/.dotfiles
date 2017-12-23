@@ -1,1 +1,0 @@
---prefix=${HOME}/nvptx-ascii/local --target=nvptx-none --enable-as-accelerator-for=x86_64-pc-linux-gnu --disable-sjlj-exceptions --enable-newlib-io-long-long

@@ -1,1 +1,0 @@
---disable-multilib --enable-languages=c,c++,fortran,lto --prefix=${HOME}/nvptx-elf/local --build=x86_64-pc-linux-gnu --host=x86_64-pc-linux-gnu --target=x86_64-pc-linux-gnu --enable-offload-targets=nvptx-unknown-elf --disable-bootstrap
