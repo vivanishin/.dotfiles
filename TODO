@@ -1,21 +1,7 @@
 * [bash]: ^C -> save the command in history with prepended '#'
-* ml-grep: add the auto-download function
 * rcre should be able to reload bashrc for all tmux sessions
 * Either separate scripts or at least functions in separate files like in http://unix.stackexchange.com/a/282331/128174
-* Also ask git (the cron job) for patches (staged and unstaged) and save each to a separate file wip-date-[un]staged.diff
-* Learn Mail, make cron jobs send reports when they fail.
-* Add Kindle highlights parsing to this repository
-* Move vk_saver to this repository
-* Script for automatically updating the dot-files and scripts from different places in the system(s) (run as an anacron job).
-  - or hardlinks? Hardlinks have drawbacks though: if you stash, it gets stashed in the system as well.
-* Reread how to apply a license to the code and ISC the code in this repo.
-* bashrc should be in dotfiles, updated w/the same fetch script...
-* gdbinit: dd should work with
-  - cgraph_node* (call node->debug())
-  - rtx (call debug_rtx (expr))
-  - gimple tree (as before)
 * Use submodules for vim plugins
 * Add archbook files in a structured way (with all the filesystem structure, but with only a few files)
   - systemd scripts
   - /etc/fstab
-* Re-structure this TODO (priority items vs. all others)
