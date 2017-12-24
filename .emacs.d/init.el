@@ -3,8 +3,15 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (package-initialize)
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 ;;; ------------------------------------------------------------
 ;;; Theme
+(use-package solarized-theme
+  :ensure t)
+
 (when window-system
  (require 'solarized)
  (load-theme 'solarized-dark t) ;wombat; misterioso; wheatgrass
@@ -32,10 +39,6 @@
 
 ;;; ------------------------------------------------------------
 ;;; Packages.
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
 (use-package default-text-scale
   :ensure t
   :config
@@ -61,6 +64,9 @@
 
 ;; TODO: https://github.com/noctuid/lispyville
 (use-package lispy
+  :ensure t)
+
+(use-package python-mode
   :ensure t)
 
 (use-package evil
@@ -178,6 +184,7 @@ the name of FILE in the current directory, suitable for creation"
 (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
 (modify-syntax-entry ?_ "w" magit-revision-mode-syntax-table)
 (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)
+(modify-syntax-entry ?_ "w" python-mode-syntax-table)
 
 (add-hook 'sh-mode-hook
           (lambda () (modify-syntax-entry ?_ "w" sh-mode-syntax-table)))
@@ -191,9 +198,6 @@ the name of FILE in the current directory, suitable for creation"
 (modify-syntax-entry ?- "w" magit-revision-mode-syntax-table)
 (modify-syntax-entry ?- "w" makefile-mode-syntax-table)
 
-
-(require 'python-mode)
-(modify-syntax-entry ?_ "w" python-mode-syntax-table)
 
 ;; TODO: Remove sensitive data and check in init-gnus.el
 (require 'init-gnus)
