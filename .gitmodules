@@ -1,0 +1,3 @@
+[submodule ".vimperator/colors"]
+	path = .vimperator/colors
+	url = https://github.com/vimpr/vimperator-colors.git
