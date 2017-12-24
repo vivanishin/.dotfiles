@@ -30,16 +30,6 @@ nnoremap tg gT
 nnoremap <Leader>3 #
 nnoremap <Leader>8 *
 
-" Russian keyboard.
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-highlight lCursor guifg=NONE guibg=Cyan
-
-" Spell check accepting Russian yo.
-set spell spelllang=ru_yo,en_us
-set nospell
-
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
