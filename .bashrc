@@ -302,6 +302,7 @@ alias gd='git diff'
 alias amend='git commit --amend'
 alias gds='git diff --staged'
 alias gsd='git diff --staged'
+alias config='git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME'
 
 alias cdd='cd `pwd`'
 alias qwer='cd /home/ivladak/src/gcc-gomp'
