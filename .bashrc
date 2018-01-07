@@ -211,7 +211,7 @@ export HISTTIMEFORMAT="%F %T  "
 
 # This should go after other modifications of PROMPT_COMMAND (or these other
 # modifications should append rather that rewrite the variable).
-. /home/ivladak/inst/z/z.sh
+. ~/bin/z/z.sh
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -232,15 +232,14 @@ export CLICOLOR=YES
 export LD_LIBRARY_PATH=/home/ivladak/inst/lib:/usr/lib64:$HOME/local/lib64
 
 for path in /opt/cuda-7.0.18RC/bin \
-            /home/ivladak/S/shell \
-            /home/ivladak/inst/git-browse/bin \
-            /home/ivladak/inst/bin \
-            /home/vlad/bin
+	    ~/bin
 do
-  if [ -d $path ] && [ ! -w "$path" ] \
-     && (! echo $PATH | egrep "($path:|$path/:|$path$)" > /dev/null 2>&1)
+  [ ! -e "$path" ] && continue
+  if [ ! -w "$path" ] && ! echo $PATH | egrep -q "($path:|$path/:|$path$)"
   then
     PATH=$path:$PATH
+  else
+    echo "not adding $path to PATH"
   fi
 done
 export PATH
@@ -306,7 +305,7 @@ alias config='git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME'
 
 alias cdd='cd `pwd`'
 alias qwer='cd /home/ivladak/src/gcc-gomp'
-alias bd="$EDITOR ~/src/build-default.sh"
+alias bd="$EDITOR ~/bin/build-default.sh"
 alias rc="$EDITOR ~/.bashrc"
 alias rcre=". ~/.bashrc"
 
