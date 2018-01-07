@@ -1,12 +1,5 @@
 # .bashrc
 
-
-# == TODO: refactor the functions into standalone scripts. ==
-weather()
-{
-    curl "http://wttr.in/${1:-Moscow}"
-}
-
 up() {
     local cnt=${1:-1}
     local old_wd=$PWD
@@ -15,12 +8,6 @@ up() {
             cd ../
     done
     OLDPWD=$old_wd
-}
-
-# Cause gdb to reinitialize tui mode.
-sigwinch()
-{
-  kill -SIGWINCH $(ps -u $(id -u) | grep gdb | awk '{print $1}' | tr '\n' ' ')
 }
 
 # Kill all background processes of this shell except for the given space-separated list.
@@ -47,30 +34,6 @@ killexcept()
   rm $tmpfile
 }
 
-dotag()
-{
-  ctags -R &
-  pid1=$!
-  ctags -Re &
-  pid2=$!
-  cscope -bR &
-  pid3=$!
-  wait $pid1 $pid2 $pid3
-  cscope-indexer -l -r
-}
-
-doautoconf()
-{
-  local old="$PWD"
-  local bindir="/home/ivladak/inst/autoconf/bin"
-  for subdir in "" "gcc" "libgomp" "libgfortran" "libiberty" "lto-plugin"
-  do
-    cd "/home/ivladak/src/gcc-gomp/$subdir" || echo "doautoconf: FAILed to cd" >&2
-    $bindir/autoconf || echo "doautoconf: FAIL" >&2
-  done
-  cd "$old"
-}
-
 dounset()
 {
   unset LIBRARY_PATH
@@ -81,84 +44,10 @@ dounset()
   unset COLLECT_GCC_OPTIONS
 }
 
-strace_wrapper_static=0
-strace_wrapper()
-{
-  local options=(-yy -f -s 1024)
-  local trace="-e trace=execve,vfork"
-  (! echo $TRACE_OPTS | grep noenv > /dev/null) && options+=(-v)
-  (echo $TRACE_OPTS | grep full > /dev/null) && trace="$trace,file,read,write,chdir,stat"
-
-  options+=($trace)
-  local logname="/tmp/strace-$strace_wrapper_static"
-  options+=(-o "$logname" "$@")
-
-  strace "${options[@]}"
-  local retcode=$?
-
-  strace_wrapper_static=$((strace_wrapper_static + 1))
-  echo "$logname"
-  strace-treeify "$logname"
-
-  return $retcode
-}
-
-showfind()
-{
-    f_show=""
-    f_grep_filenames=""
-    f_print_command=""
-    f_ignorecase=""
-    f_color="--color=always"
-    while [ $# -gt 0 ]
-    do
-        case $1 in
-        -s | -sh | -sho | -show )
-          f_show="yes"
-          f_color="--color"
-        ;;
-        -f | -fi | -fil | -file | -filenames ) f_grep_filenames="yes" ;;
-        -c | -cm | -cmd | -command ) f_print_command="yes" ;;
-        -i ) f_ignorecase="-i" ;;
-        * ) break ;;
-        esac
-        shift
-    done
-#    f_cmd='find . -name "*.[chCH]" -o -name "*.def" -o -name "*.in" -o -name "*.ac" -o -iname "*Make*" | '
-
-    f_cmd="find . -type f -a -not -name '.*' -a -not -name 'cscope.out' -a -not -name 'tags' -a -not -name 'ccglue.out*' \
-           -a -not -path './.git/*' -a -not -path '*/autom4te.cache/*' \
-           -a -not -name 'configure' -a -not -name 'ChangeLog*' | "
-
-    [ ! "x$f_grep_filenames" = "xyes" ] && f_cmd="$f_cmd xargs "
-
-    f_cmd="$f_cmd grep $f_ignorecase -nH $f_color \"$1\" 2> /dev/null "
-
-    [ "x$f_show" = "xyes" ] && f_cmd="$f_cmd | awk -F: '{ print \"less \" \"+\" \$2 \" -N \" \$1  }' | sh -"
-
-    if [ "x$f_print_command" = "xyes" ]
-    then
-        echo "$f_cmd"
-        return
-    fi
-
-    eval $f_cmd
-}
-
 unalias gsh > /dev/null 2>&1
 gsh()
 {
   git show ${@-HEAD}
-}
-
-# Print names of all the functions and defined macros in the C source file
-# given it follows the GNU coding style conventions.
-outline()
-{
-  sed -n '/^\([a-zA-Z0-9_:]\{1,\}\) (/p' $@  | awk '{ print $1 }' | sort -u
-  echo "--"
-  sed -n '/^[[:space:]]\{0,\}#define[[:space:]]\{0,\}\([a-zA-Z0-9_:]\{1,\}\)(/p' $@ \
-    | awk -F'[( \t]' '{ print $2 }' | sort -u
 }
 
 # See http://eli.thegreenplace.net/2013/06/11/keeping-persistent-history-in-bash
