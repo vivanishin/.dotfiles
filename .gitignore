@@ -11,3 +11,10 @@ config-files/dotfiles/emacs.d/*
 !config-files/dotfiles/emacs.d/lisp/*
 .vimperator/info
 .vim/.netrwhist
+
+.*
+!.gitignore
+*~
+bashrc
+iso/
+mkpriv
