@@ -1,8 +1,0 @@
-* [bash]: ^C -> save the command in history with prepended '#'
-* rcre should be able to reload bashrc for all tmux sessions
-* Either separate scripts or at least functions in separate files like in http://unix.stackexchange.com/a/282331/128174
-* Use submodules for vim plugins
-* And also for z. (Or find some alternative way to pull z automatically)
-* Add archbook files in a structured way (with all the filesystem structure, but with only a few files)
-  - systemd scripts
-  - /etc/fstab
