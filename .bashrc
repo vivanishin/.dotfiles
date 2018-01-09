@@ -157,6 +157,7 @@ shopt -s checkwinsize
 # Assume we have colorful terminal. (Else use this: PS1='[\u@\h \W]\$ ')
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
+# TODO: look for another way to test that ls and grep have the --color option
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
