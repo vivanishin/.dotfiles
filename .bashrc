@@ -124,9 +124,10 @@ for path in /opt/cuda-7.0.18RC/bin \
 	    ~/bin
 do
   [ ! -e "$path" ] && continue
-  if [ ! -w "$path" ] && ! echo $PATH | egrep -q "($path:|$path/:|$path$)"
+  echo $PATH | egrep -q "($path:|$path/:|$path$)" && continue
+  if [ ! -w "$path" ]
   then
-    PATH=$path:$PATH
+    PATH=$PATH:$path
   else
     echo "not adding $path to PATH"
   fi
