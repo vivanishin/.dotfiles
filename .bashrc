@@ -213,6 +213,9 @@ alias crontab='crontab -i'
 alias sshowfind='showfind -s'
 alias mplayer='mplayer -af scaletempo'
 
+alias y='cd /root/iso/tmp/fake_root/'
+alias ch='chroot /root/iso/tmp/fake_root/'
+
 alias def=sdcv
 
 if [ -f ~/.bash_aliases ]; then
