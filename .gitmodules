@@ -13,3 +13,9 @@
 [submodule ".vim/bundle/vim-fetch"]
 	path = .vim/bundle/vim-fetch
 	url = https://github.com/kopischke/vim-fetch.git
+[submodule ".emacs.d/lisp/emacs-cquery"]
+	path = .emacs.d/lisp/emacs-cquery
+	url = https://github.com/cquery-project/emacs-cquery.git
+[submodule ".emacs.d/lisp/lsp-mode"]
+	path = .emacs.d/lisp/lsp-mode
+	url = https://github.com/emacs-lsp/lsp-mode.git

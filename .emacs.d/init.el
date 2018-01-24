@@ -116,8 +116,27 @@
 (use-package pdf-tools
   :ensure t)
 
-(use-package xcscope
+(use-package flycheck
   :ensure t)
+
+(use-package lsp-mode
+  :ensure t
+  :after flycheck
+  :load-path
+  "~/.emacs.d/lisp/lsp-mode"
+  :commands (lsp-mode lsp-define-stdio-client lsp-client-on-notification
+                      lsp-make-traverser lsp-capabilites lsp-mode-line
+                      lsp-define-tcp-client)
+  :config
+  (require 'lsp-flycheck)
+  (use-package cquery
+    :ensure t
+    :load-path
+    "~/.emacs.d/lisp/emacs-cquery"
+    :config
+    (setq cquery-executable "/mnt/co/cquery/build/release/bin/cquery")
+    (add-hook 'c++-mode-hook 'lsp-cquery-enable)
+    (add-hook 'c-mode-hook 'lsp-cquery-enable)))
 
 (use-package grep-a-lot
   :ensure t

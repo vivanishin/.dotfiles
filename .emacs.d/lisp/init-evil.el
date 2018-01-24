@@ -42,9 +42,7 @@
   (evil-define-key 'normal global-map (kbd "C-u")  'evil-scroll-up)
   (evil-define-key 'normal global-map (kbd "z z")  'evil-write)
   (evil-define-key 'normal global-map (kbd "C-t")  'find-tag)
-  ; TODO: depending on the minor mode we might want to
-  ; xref-find-references instead.
-  (evil-define-key 'normal global-map (kbd "C-g")  'cscope-find-this-symbol)
+  (evil-define-key 'normal global-map (kbd "C-g")  'xref-find-references)
   (evil-define-key 'normal global-map (kbd "<f3>") 'xref-find-definitions)
   (evil-define-key 'insert global-map (kbd "C-u")  'backward-kill-line))
 
