@@ -7,6 +7,13 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package auto-package-update
+  :ensure t
+  :config
+  (setq auto-package-update-delete-old-versions t
+        auto-package-update-interval 4)
+  (auto-package-update-maybe))
+
 ;;; ------------------------------------------------------------
 ;;; Theme
 (use-package solarized-theme
@@ -255,7 +262,7 @@ the name of FILE in the current directory, suitable for creation"
      ("org" . "http://orgmode.org/elpa/"))))
  '(package-selected-packages
    (quote
-    (wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-details+ dired-x paredit evil-paredit image+ key-chord xcscope evil-search-highlight-persist highlight evil-leader pdf-tools evil-magit magit use-package solarized-theme evil)))
+    (dired+ dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-details+ dired-x paredit evil-paredit image+ key-chord xcscope evil-search-highlight-persist highlight evil-leader pdf-tools evil-magit magit use-package solarized-theme evil)))
  '(scheme-program-name "guile")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
