@@ -6,5 +6,7 @@
 [alias]
 	checkout = co
 	co = checkout
+	graph = "log --branches=* --graph --oneline --decorate --date-order"
+
 [core]
 	excludesfile = /home/ivladak/.gitignore-global
