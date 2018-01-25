@@ -104,9 +104,7 @@
 (require 'dired)
 (define-key dired-mode-map (kbd "SPC") 'dired-up-directory)
 (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
-
-(use-package dired-details+
-  :ensure t)
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 (use-package magit
   :config
