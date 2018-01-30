@@ -214,6 +214,7 @@ alias sshowfind='showfind -s'
 alias mplayer='mplayer -af scaletempo'
 
 alias def=sdcv
+alias ]=xdg-open
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
