@@ -55,6 +55,8 @@
     "q" 'auto-fill-mode
     "e" 'evil-append-line
     "t" 'find-tag
+    "k" 'bookmark-jump
+    "a" 'bookmark-set
     "rs" 'rm-eol-whitespace
     "gs" 'magit-status
     "gl" 'magit-log-all
