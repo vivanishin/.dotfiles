@@ -10,3 +10,5 @@
 
 [core]
 	excludesfile = /home/ivladak/.gitignore-global
+[diff]
+	algorithm = patience
