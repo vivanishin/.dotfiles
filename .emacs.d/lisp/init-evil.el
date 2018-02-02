@@ -57,10 +57,12 @@
     "t" 'find-tag
     "k" 'bookmark-jump
     "a" 'bookmark-set
+    "p" 'projectile-find-file
     "rs" 'rm-eol-whitespace
     "gs" 'magit-status
     "gl" 'magit-log-all
     "gd" 'magit-diff
+    "gg" 'projectile-grep
     "bl" 'toggle-blame-mode
     "3" 'evil-search-word-backward
     "8" 'evil-search-word-forward))
