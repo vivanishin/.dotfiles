@@ -212,6 +212,7 @@ alias psgrep="ps -A | grep "
 alias crontab='crontab -i'
 alias sshowfind='showfind -s'
 alias mplayer='mplayer -af scaletempo'
+alias fej='find . -type f -print0 -iname \*.jpg -o -iname \*.jpeg | sort -z | xargs -0 feh -Z --auto-rotate --scale-down'
 
 alias def=sdcv
 alias ]=xdg-open
