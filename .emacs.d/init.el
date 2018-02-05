@@ -101,6 +101,9 @@
   :config
   (ido-mode 1))
 
+(use-package which-key
+  :ensure t)
+
 (require 'dired)
 (define-key dired-mode-map (kbd "SPC") 'dired-up-directory)
 (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
@@ -268,7 +271,7 @@ the name of FILE in the current directory, suitable for creation"
      ("org" . "http://orgmode.org/elpa/"))))
  '(package-selected-packages
    (quote
-    (projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ key-chord evil-search-highlight-persist highlight evil-leader pdf-tools evil-magit magit use-package solarized-theme evil)))
+    (which-key projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ key-chord evil-search-highlight-persist highlight evil-leader pdf-tools evil-magit magit use-package solarized-theme evil)))
  '(scheme-program-name "guile")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
