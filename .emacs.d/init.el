@@ -124,7 +124,8 @@
 (use-package projectile
   :ensure t
   :config
-  (setq projectile-enable-caching t)
+  (setq projectile-enable-caching t
+        projectile-use-git-grep t)
   (add-to-list 'projectile-globally-ignored-directories ".vscode")
   (add-hook 'prog-mode-hook 'projectile-mode))
 
