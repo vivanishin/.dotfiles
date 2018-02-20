@@ -61,7 +61,7 @@
     "rs" 'rm-eol-whitespace
     "re" '(lambda () (interactive) (load-file "~/.emacs.d/init.el"))
     "gs" 'magit-status
-    "gl" 'magit-log-all
+    "gl" 'magit-log-current
     "gd" 'magit-diff
     "gg" 'projectile-grep
     "bl" 'toggle-blame-mode
