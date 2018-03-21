@@ -55,6 +55,7 @@
     "q" 'auto-fill-mode
     "e" 'evil-append-line
     "t" 'find-tag
+    "y" 'fcp
     "k" 'bookmark-jump
     "a" 'bookmark-set
     "p" 'projectile-find-file

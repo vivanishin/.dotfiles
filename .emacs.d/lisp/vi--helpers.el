@@ -1,6 +1,11 @@
 ;;; I chose to refer to myself as vi in elisp code since these two
 ;;; letters happen to be an abbreviation of my name.
 
+(defun fcp ()  ;; https://stackoverflow.com/a/2417617/2104472
+  "Copy current file name to clipboard"
+  (interactive)
+  (let ((x-select-enable-clipboard t)) (kill-new (buffer-file-name))))
+
 (defun toggle-blame-mode ()
   (interactive)
   (cond ((bound-and-true-p magit-blame-mode)
