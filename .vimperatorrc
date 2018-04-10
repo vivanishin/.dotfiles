@@ -1,7 +1,7 @@
 cmap <C-c> <Esc>
 imap <C-c> <Esc>
 noremap <C-c> <Esc>
-set gui=nonavigation,nobookmarks
+set gui=nonavigation,nobookmarks,nomenu
 map <C-e> :tabduplicate<CR>
 map <C-l> :nohlsearch<CR>
 " Toggle full screen mode.
