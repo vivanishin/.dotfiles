@@ -3,6 +3,7 @@
 *.bin
 *.pyc
 config.py
+!.config/qutebrowser/config.py
 mailing-list-archives/gcc-ml/gcc.gnu.org/*
 config-files/dotfiles/emacs.d/*
 
