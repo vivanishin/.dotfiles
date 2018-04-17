@@ -8,6 +8,10 @@ set tags=tags;
 set splitright
 set matchpairs+=<:>
 
+if &diff
+  colorscheme darkblue " TODO: apprentice
+endif
+
 let mapleader = "\<Space>"
 " Copy & paste to system clipboard with <Space>p and <Space>y.
 vmap <Leader>y "+y
