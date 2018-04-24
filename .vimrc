@@ -9,7 +9,7 @@ set splitright
 set matchpairs+=<:>
 
 if &diff
-  colorscheme darkblue " TODO: apprentice
+  colorscheme apprentice
 endif
 
 let mapleader = "\<Space>"
