@@ -197,6 +197,7 @@ the name of FILE in the current directory, suitable for creation"
 ;(require 'my-misc) ;; 'requires' are idempotent, you know
 ;(reverse-input-method "russian-computer")
 
+(setq browse-url-browser-function 'browse-url-xdg-open)
 (setq tramp-default-method "scp")
 (setq enable-remote-dir-locals t)
 (setq column-number-mode t)
