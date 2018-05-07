@@ -140,7 +140,9 @@
                       lsp-make-traverser lsp-capabilites lsp-mode-line
                       lsp-define-tcp-client)
   :init
-  (require 'lsp-flycheck)
+  (use-package lsp-ui
+    :ensure t)
+  (require 'lsp-ui-flycheck)
   (use-package cquery
     :ensure t
     :load-path
