@@ -670,8 +670,6 @@
 ##   - system: Use the system wide proxy.
 ##   - none: Don't use any proxy
 # c.content.proxy = 'system'
-#c.content.proxy = 'socks://127.0.0.1:9050'
-c.content.proxy = 'system'
 
 ## Send DNS requests over the configured proxy.
 ## Type: Bool
@@ -1401,6 +1399,7 @@ config.bind('<Ctrl-p>', 'tab-prev')
 config.bind(';t', 'hint all tab-fg')
 config.bind('Y', 'spawn instapaper {url};; message-info "added {url}"')
 config.bind('e', 'config-source')
+config.bind('X', 'config-cycle --temp --print content.proxy socks://127.0.0.1:9050 system')
 # config.bind('yy', 'yank')
 # config.bind("'", 'enter-mode jump_mark')
 # config.bind('+', 'zoom-in')
