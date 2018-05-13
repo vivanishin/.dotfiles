@@ -685,7 +685,7 @@
 
 ## List of user stylesheet filenames to use.
 ## Type: List of File, or File
-# c.content.user_stylesheets = [] # here we go [solarized]
+# c.content.user_stylesheets = []
 
 ## Enable WebGL.
 ## Type: Bool
@@ -1400,6 +1400,9 @@ config.bind(';t', 'hint all tab-fg')
 config.bind('Y', 'spawn instapaper {url};; message-info "added {url}"')
 config.bind('e', 'config-source')
 config.bind('X', 'config-cycle --temp --print content.proxy socks://127.0.0.1:9050 system')
+config.bind('<Ctrl-R>',
+            'config-cycle content.user_stylesheets '
+            '~/.config/qutebrowser/solarized-everything-css/css/solarized-all-sites-dark.css ""')
 # config.bind('yy', 'yank')
 # config.bind("'", 'enter-mode jump_mark')
 # config.bind('+', 'zoom-in')
