@@ -19,3 +19,6 @@
 [submodule ".emacs.d/lisp/lsp-mode"]
 	path = .emacs.d/lisp/lsp-mode
 	url = https://github.com/emacs-lsp/lsp-mode.git
+[submodule ".config/qutebrowser/solarized-everything-css"]
+	path = .config/qutebrowser/solarized-everything-css
+	url = https://github.com/alphapapa/solarized-everything-css.git
