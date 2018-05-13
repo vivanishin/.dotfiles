@@ -2,8 +2,6 @@
 # ss to hide/show tab bar
 # readline-like keys for insert mode and ideally command(?) mode as well
 # C-n, C-p
-# shortcut to toggle solarized theme [solarized]
-# shortcut to switch proxy (userscript?)
 # c.editor.command [emacs]
 # c.keyhint.delay [what bad does setting this to zero do?]
 # C-u (TODO)
