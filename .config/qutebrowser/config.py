@@ -1354,7 +1354,9 @@ c.url.searchengines = {
   'wa':  'https://wiki.archlinux.org/?search={}',
   'ym':  'https://yandex.ru/maps/213/moscow/?mode=search&text={}',
   'm':   'https://yandex.ru/maps/213/moscow/?mode=search&text={}',
-  'gr':  'https://www.goodreads.com/search?q={}',}
+  'gr':  'https://www.goodreads.com/search?q={}',
+  'w':   'https://en.wikipedia.org/wiki/Special:Search/{}',
+}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
