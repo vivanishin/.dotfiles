@@ -1350,6 +1350,7 @@ c.tabs.width = '15%'
 ## Type: Dict
 c.url.searchengines = {
   'DEFAULT': 'https://www.google.com/search?hl=en&q={}',
+  'g':   'https://www.google.com/search?hl=en&q={}',
   'ddg': 'https://duckduckgo.com/?q={}',
   'wa':  'https://wiki.archlinux.org/?search={}',
   'ym':  'https://yandex.ru/maps/213/moscow/?mode=search&text={}',
