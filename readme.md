@@ -18,6 +18,3 @@ config checkout
 - non-renamed (e.g. "1","2",...) tmux session killer
     mb reap once an hour all detached non-renamed sections which have been
     inactive for a while
-- Add archbook files in a structured way (with all the filesystem structure, but with only a few files)
-  - systemd scripts
-  - /etc/fstab
