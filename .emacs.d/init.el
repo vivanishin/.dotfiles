@@ -22,7 +22,7 @@
 (when window-system
  (require 'solarized)
  (load-theme 'solarized-dark t) ;wombat; misterioso; wheatgrass
- (add-to-list 'default-frame-alist '(font . "Inconsolata 11"))
+ (add-to-list 'default-frame-alist '(font . "Inconsolata LGC 11"))
  (setq x-pointer-shape x-pointer-arrow))
 
 (menu-bar-mode -1)
