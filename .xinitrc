@@ -49,7 +49,7 @@ do
 done &
 
 xset r rate 200 50
-firefox&
+qutebrowser&
 st -e tmux&
 
 exec dwm 2> /tmp/log.dwm 1>&2
