@@ -1412,7 +1412,7 @@ config.bind('X', 'config-cycle --temp --print content.proxy socks://127.0.0.1:90
 config.bind('<F1>', 'config-cycle --temp --print tabs.show multiple switching')
 config.bind('<Ctrl-R>',
             'config-cycle content.user_stylesheets '
-            '~/.config/qutebrowser/solarized-everything-css/css/solarized-all-sites-dark.css ""')
+            '~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""')
 # config.bind('yy', 'yank')
 # config.bind("'", 'enter-mode jump_mark')
 # config.bind('+', 'zoom-in')
