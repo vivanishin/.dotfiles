@@ -42,7 +42,7 @@ setxkbmap -model apple_laptop \
 while true
 do
   LOCALTIME=$(date +%H:%M)
-  BAT=$(cat /sys/class/power_supply/BAT0/capacity)
+  BAT=$(acpi --battery | grep -o '[0-9]\+%')
 
   xsetroot -name "$LOCALTIME $BAT%"
   sleep 20s
