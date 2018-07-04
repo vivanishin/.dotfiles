@@ -44,7 +44,7 @@ do
   LOCALTIME=$(date +%H:%M)
   BAT=$(acpi --battery | grep -o '[0-9]\+%')
 
-  xsetroot -name "$LOCALTIME $BAT%"
+  xsetroot -name "$LOCALTIME $BAT"
   sleep 20s
 done &
 
