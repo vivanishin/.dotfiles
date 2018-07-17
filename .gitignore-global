@@ -11,3 +11,6 @@ TAGS
 
 *.o
 *.so
+
+# cquery artifacts
+.vscode
