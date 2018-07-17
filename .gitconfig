@@ -9,6 +9,6 @@
 	graph = "log --branches=* --graph --oneline --decorate --date-order"
 
 [core]
-	excludesfile = /home/ivladak/.gitignore-global
+	excludesfile = /home/vlad/.gitignore-global
 [diff]
 	algorithm = patience
