@@ -202,6 +202,7 @@ alias rcre=". ~/.bashrc"
 
 alias ga='gdb --args'
 alias oh='objdump -h'
+alias re='readelf -aW'
 alias trns="tr '\n' ' ' && echo"
 alias trsn="tr ' ' '\n'"
 
