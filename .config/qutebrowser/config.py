@@ -18,7 +18,10 @@
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
 ## Type: Dict
-# c.aliases = {'w': 'session-save', 'q': 'quit', 'wq': 'quit --save'}
+c.aliases = {'w': 'session-save',
+                 'q': 'quit',
+                 'wq': 'quit --save',
+                 'reload-next': 'reload ;; tab-next'}
 
 ## Time interval (in milliseconds) between auto-saves of
 ## config/cookies/etc.
