@@ -21,7 +21,8 @@
 c.aliases = {'w': 'session-save',
                  'q': 'quit',
                  'wq': 'quit --save',
-                 'reload-next': 'reload ;; tab-next'}
+                 'reload-next': 'reload ;; tab-next',
+                 'rr': 'repeat 60 reload-next'}
 
 ## Time interval (in milliseconds) between auto-saves of
 ## config/cookies/etc.
