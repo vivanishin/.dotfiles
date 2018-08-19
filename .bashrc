@@ -172,6 +172,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias L='less -R'
+alias tre='pstree -apl | less'
 
 alias j='jobs'
 alias v='vim'
