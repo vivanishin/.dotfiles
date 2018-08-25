@@ -18,3 +18,5 @@ Used for GCC debugging. Dumps textual representation of the tree provided.
 end
 
 alias dd = dump-tree
+
+source /mnt/co/gcc/gcc/gdbinit.in
