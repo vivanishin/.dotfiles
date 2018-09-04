@@ -223,6 +223,8 @@ the name of FILE in the current directory, suitable for creation"
 (modify-syntax-entry ?_ "w" magit-revision-mode-syntax-table)
 (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)
 (modify-syntax-entry ?_ "w" python-mode-syntax-table)
+(with-eval-after-load 'org
+  (modify-syntax-entry ?_ "w" org-mode-syntax-table))
 
 (add-hook 'sh-mode-hook
           (lambda () (modify-syntax-entry ?_ "w" sh-mode-syntax-table)))
