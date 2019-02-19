@@ -43,4 +43,7 @@
               (save-excursion (insert "#+END_" choice))))))))))
 
 ;;bind to key
-(define-key org-mode-map (kbd "C-<") 'org-begin-template)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-<") 'org-begin-template))
+
+(provide 'vi--org-mode)
