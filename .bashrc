@@ -10,6 +10,11 @@ up() {
     OLDPWD=$old_wd
 }
 
+cpath()
+{
+    realpath $1 | tee >(cat 1>&2) | xclip -in -selection clipboard
+}
+
 # Kill all background processes of this shell except for the given space-separated list.
 killexcept()
 {
