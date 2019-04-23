@@ -19,4 +19,5 @@ end
 
 alias dd = dump-tree
 
-source /mnt/co/gcc/gcc/gdbinit.in
+add-auto-load-safe-path /mnt/bld/gcc-*/gcc-gomp-host/gcc/
+add-auto-load-safe-path /mnt/bld/gcc-*/gcc/
