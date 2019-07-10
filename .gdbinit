@@ -21,3 +21,5 @@ alias dd = dump-tree
 
 add-auto-load-safe-path /mnt/bld/gcc-*/gcc-gomp-host/gcc/
 add-auto-load-safe-path /mnt/bld/gcc-*/gcc/
+
+set index-cache on
