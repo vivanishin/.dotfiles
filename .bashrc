@@ -15,6 +15,18 @@ cpath()
     realpath $1 | tee >(cat 1>&2) | xclip -in -selection clipboard
 }
 
+tmp()
+{
+    dir=/tmp/$(date +%m-%d)
+    if [ -e $dir ]; then
+        echo "$dir already exists"
+    fi
+    mkdir -p $dir
+    if $(which xclip &>/dev/null); then
+        echo "cd $dir" | xclip -in -selection clipboard
+    fi
+}
+
 # Kill all background processes of this shell except for the given space-separated list.
 killexcept()
 {
