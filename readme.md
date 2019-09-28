@@ -9,7 +9,7 @@ cd
 git clone --bare --recurse-submodules https://github.com/ivladak/.dotfiles.git
 alias config='git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME'
 config checkout
-config submodule update --recursive --remote # a hack: `checkout --recurse-submodules' should work, but doesn't seem to
+config submodule update --init --recursive --remote # a hack: `checkout --recurse-submodules' should work, but doesn't seem to
 ```
 
 # TODO:
