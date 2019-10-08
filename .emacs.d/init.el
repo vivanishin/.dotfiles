@@ -221,7 +221,6 @@ the name of FILE in the current directory, suitable for creation"
 (require 'make-mode)
 (modify-syntax-entry ?_ "w" c-mode-syntax-table)
 (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
-(modify-syntax-entry ?_ "w" magit-revision-mode-syntax-table)
 (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)
 (modify-syntax-entry ?_ "w" python-mode-syntax-table)
 (with-eval-after-load 'org
@@ -236,7 +235,11 @@ the name of FILE in the current directory, suitable for creation"
 ;; Treat the dash symbol as a part of a word in emacs lisp.
 (modify-syntax-entry ?- "w" emacs-lisp-mode-syntax-table)
 (modify-syntax-entry ?- "w" tex-mode-syntax-table)
-(modify-syntax-entry ?- "w" magit-revision-mode-syntax-table)
+
+(dolist (char '(?- ?_))
+  (add-hook 'magit-revision-mode-hook
+            `(lambda () (modify-syntax-entry ,char "w" magit-revision-mode-syntax-table))))
+
 (modify-syntax-entry ?- "w" makefile-mode-syntax-table)
 
 
