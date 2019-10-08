@@ -133,36 +133,10 @@
 (use-package pdf-tools
   :ensure t)
 
-(use-package lsp-mode
-  :ensure t
-  :load-path
-  "~/.emacs.d/lisp/lsp-mode"
-  :commands (lsp-mode lsp-define-stdio-client lsp-client-on-notification
-                      lsp-make-traverser lsp-capabilites lsp-mode-line
-                      lsp-define-tcp-client)
-  :init
-  (use-package lsp-ui
-    :ensure t)
-  (require 'lsp-ui-flycheck)
-  (use-package cquery
-    :ensure t
-    :load-path
-    "~/.emacs.d/lisp/emacs-cquery"
-    :config
-    (setq cquery-executable "/mnt/co/cquery/build/release/bin/cquery")
-    (setq cquery-extra-init-params '(:enableComments 2
-                                     :cacheFormat "msgpack"
-                                     :cacheDirectory "/media/big/tmp/cquery"))
-    :init
-    (add-hook 'c-mode-common-hook (lambda ()
-                                    (message "enable lsp for c and c++")
-                                    (lsp-cquery-enable)))))
-
 (use-package grep-a-lot
   :ensure t
   :config
   (grep-a-lot-setup-keys))
-
 
 ;;; ------------------------------------------------------------
 ;;; Build with make. https://emacswiki.org/emacs/CompileCommand#toc5
