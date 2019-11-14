@@ -15,15 +15,20 @@ cpath()
     realpath $1 | tee >(cat 1>&2) | xclip -in -selection clipboard
 }
 
+# Create a fresh temp directory for today and copy its name to the clipboard.
+# cd there if it already exists.
 tmp()
 {
     dir=/tmp/$(date +%m-%d)
-    if [ -e $dir ]; then
-        echo "$dir already exists"
-    fi
-    mkdir -p $dir
+    echo "$dir"
     if $(which xclip &>/dev/null); then
-        echo "cd $dir" | xclip -in -selection clipboard
+        printf " $dir " | xclip -in -selection clipboard
+    fi
+    if [ -e "$dir" ]; then
+        echo "Already exists. Changing working directory."
+        cd "$dir"
+    else
+        mkdir -p $dir
     fi
 }
 
