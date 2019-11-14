@@ -16,7 +16,7 @@ cpath()
 }
 
 # Create a fresh temp directory for today and copy its name to the clipboard.
-# cd there if it already exists.
+# cd there if an argument is passed.
 tmp()
 {
     dir=/tmp/$(date +%m-%d)
@@ -24,12 +24,8 @@ tmp()
     if $(which xclip &>/dev/null); then
         printf " $dir " | xclip -in -selection clipboard
     fi
-    if [ -e "$dir" ]; then
-        echo "Already exists. Changing working directory."
-        cd "$dir"
-    else
-        mkdir -p $dir
-    fi
+    mkdir -p $dir
+    [ -n "$1" ] && cd "$dir"
 }
 
 # Kill all background processes of this shell except for the given space-separated list.
