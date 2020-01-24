@@ -16,6 +16,10 @@
   (auto-package-update-maybe))
 
 ;;; ------------------------------------------------------------
+;;; Language, encoding, locale...
+(define-coding-system-alias 'UTF-8 'utf-8)
+
+;;; ------------------------------------------------------------
 ;;; Theme
 (use-package solarized-theme
   :ensure t)
