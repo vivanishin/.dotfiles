@@ -139,6 +139,14 @@
   (add-to-list 'projectile-globally-ignored-directories ".vscode")
   (add-hook 'prog-mode-hook 'projectile-mode))
 
+(use-package eglot
+  :ensure t
+  :config
+  (add-to-list 'eglot-server-programs '((c++-mode c-mode)
+                                        . ("clangd" "--background-index"))))
+
+;; https://github.com/emacs-evil/evil-collection
+
 (use-package pdf-tools
   :ensure t)
 
