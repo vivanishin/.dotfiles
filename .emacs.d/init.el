@@ -99,6 +99,11 @@
     (global-evil-search-highlight-persist)
     (evil-define-key 'normal global-map (kbd "C-l") 'evil-search-highlight-persist-remove-all))
 
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode 1))
+
   (evil-mode 1))
 
 (use-package ido
