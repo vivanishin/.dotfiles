@@ -11,9 +11,8 @@
 ##   qute://help/configuring.html
 ##   qute://help/settings.html
 
-## This is here so configs done via the GUI are still loaded.
-## Remove it to not load settings done via the GUI.
-# config.load_autoconfig()
+## Do not load settings done via the GUI.
+config.load_autoconfig(False)
 
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
@@ -559,7 +558,7 @@ c.auto_save.session = True
 ## host per line - A zip-file of any of the above, with either only one
 ## file, or a file   named `hosts` (with any extension).
 ## Type: List of Url
-c.content.host_blocking.lists = [
+c.content.blocking.hosts.lists = [
     'https://www.malwaredomainlist.com/hostslist/hosts.txt',
     'http://someonewhocares.org/hosts/hosts',
     'http://winhelp2002.mvps.org/hosts.zip',
