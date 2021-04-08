@@ -254,3 +254,5 @@ if ps -ef | grep tmux | grep $(id -un) | grep -v grep > /dev/null
 then
     tmux ls
 fi
+
+. ~/.bashrc-teach

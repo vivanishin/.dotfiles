@@ -1,0 +1,39 @@
+#!/bin/bash -
+
+init_asm()
+{
+    root_dir=/mnt/co/work/teach/cmc/asm
+    if [ "$(pwd)" != $root_dir ]; then
+        echo "Wrong dir? Want to cd to $root_dir?"
+        select cont in yes no
+        do
+            case "$cont#$REPLY" in
+                "yes#"*|*"#yes")
+                    cd $root_dir
+                    break
+                    ;;
+                "no#"*|*"#no")
+                    echo "Bye then."
+                    exit 1
+                    ;;
+                *)
+                    echo "Come again? (got $REPLY)"
+                    continue
+                    ;;
+            esac
+        done
+    fi
+
+    [ -n "$1" ] && suf="-${1}"
+    dir="$(date -I)$suf"
+    mkdir -p "$dir"
+    realpath "$dir"
+    cd "$dir"
+    ln -sf ../io.inc
+    ln -sf ../build_asm.sh
+    ln -sf /mnt/co/books/sem/asm/intel386-psABI-1.1.pdf
+
+    export PS1='\[\033[01;32m\][\W]\[\033[00m\]$ '
+}
+
+alias init-asm=init_asm
