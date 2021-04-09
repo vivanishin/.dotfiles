@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-init_asm()
+init-asm()
 {
     root_dir=/mnt/co/work/teach/cmc/asm
     if [ "$(pwd)" != $root_dir ]; then
@@ -33,7 +33,14 @@ init_asm()
     ln -sf ../build_asm.sh
     ln -sf /mnt/co/books/sem/asm/intel386-psABI-1.1.pdf
 
+    __teach_save_PS1="$PS1"
     export PS1='\[\033[01;32m\][\W]\[\033[00m\]$ '
 }
 
-alias init-asm=init_asm
+deinit-asm()
+{
+    if [ "-n" "$__teach_save_PS1" ]; then
+        export PS1="$__teach_save_PS1"
+        __teach_save_PS1=
+    fi
+}
