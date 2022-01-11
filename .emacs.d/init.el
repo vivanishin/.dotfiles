@@ -65,8 +65,6 @@
 (use-package image+
   :ensure t)
 
-(require 'init-evil)
-
 (use-package highlight
   :ensure t)
 
@@ -76,32 +74,6 @@
 
 (use-package python-mode
   :ensure t)
-
-(use-package evil
-  :ensure t
-
-  :config
-
-  (use-package evil-leader
-    :ensure t
-    :config
-    (global-evil-leader-mode)
-    (vi--config-evil-leader))
-
-  (add-hook 'evil-mode-hook 'vi--config-evil)
-
-  (use-package evil-search-highlight-persist
-    :ensure t
-    :config
-    (global-evil-search-highlight-persist)
-    (evil-define-key 'normal global-map (kbd "C-l") 'evil-search-highlight-persist-remove-all))
-
-  (use-package evil-surround
-    :ensure t
-    :config
-    (global-evil-surround-mode 1))
-
-  (evil-mode 1))
 
 (use-package ido
   :ensure t
@@ -119,14 +91,10 @@
 (use-package magit
   :config
   (progn
-    (setq evil-magit-want-horizontal-movement t)
+    ;(setq evil-magit-want-horizontal-movement t)
     (setq git-commit-summary-max-length 50)
-    (use-package evil-magit
-      :ensure t
-      :config
-      (setq evil-magit-state 'normal)))
   (add-hook 'magit-revision-mode-hook 'bug-reference-mode)
-  :ensure t)
+  :ensure t))
 
 (use-package projectile
   :ensure t
@@ -142,8 +110,6 @@
   (add-to-list 'eglot-server-programs '((c++-mode c-mode)
                                         . ("clangd" "--background-index"))))
 
-;; https://github.com/emacs-evil/evil-collection
-
 (use-package pdf-tools
   :ensure t)
 
@@ -151,6 +117,44 @@
   :ensure t
   :config
   (grep-a-lot-setup-keys))
+
+(use-package evil
+  :ensure t
+
+  :init
+  (setq evil-undo-system 'undo-tree)
+  (setq evil-want-keybinding nil)
+
+  :config
+
+  (use-package evil-collection
+    :ensure t
+    :config
+    (evil-collection-init))
+
+  (use-package evil-leader
+    :ensure t
+    :config
+    (progn
+      (require 'init-evil)
+      (global-evil-leader-mode)
+      (vi--config-evil-leader)))
+
+  (add-hook 'evil-mode-hook 'vi--config-evil)
+
+  (use-package evil-search-highlight-persist
+    :ensure t
+    :config
+    (global-evil-search-highlight-persist)
+    (evil-define-key 'normal global-map (kbd "C-l") 'evil-search-highlight-persist-remove-all))
+
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode 1))
+
+  (evil-mode 1))
+
 
 ;;; ------------------------------------------------------------
 ;;; Build with make. https://emacswiki.org/emacs/CompileCommand#toc5
@@ -272,7 +276,7 @@ the name of FILE in the current directory, suitable for creation"
      ("org" . "http://orgmode.org/elpa/"))))
  '(package-selected-packages
    (quote
-    (which-key projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ key-chord evil-search-highlight-persist highlight evil-leader pdf-tools evil-magit magit use-package solarized-theme evil)))
+    (which-key projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ key-chord evil-search-highlight-persist highlight evil-leader pdf-tools magit use-package solarized-theme evil)))
  '(scheme-program-name "guile")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
