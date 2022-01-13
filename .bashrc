@@ -12,7 +12,7 @@ up() {
 
 cpath()
 {
-    realpath $1 | tee >(cat 1>&2) | xclip -in -selection clipboard
+    realpath "$1" | tee >(cat 1>&2) | xclip -in -selection clipboard
 }
 
 # Create a fresh temp directory for today and copy its name to the clipboard.
@@ -118,7 +118,7 @@ export HISTTIMEFORMAT="%F %T  "
 
 # This should go after other modifications of PROMPT_COMMAND (or these other
 # modifications should append rather that rewrite the variable).
-. ~/bin/z/z.sh
+. /home/vlad/bin/z/z.sh
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -256,3 +256,4 @@ then
 fi
 
 . ~/.bashrc-teach
+. ~/.bashrc-local
