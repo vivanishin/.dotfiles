@@ -15,6 +15,11 @@ cpath()
     realpath "${1:-.}" | tee >(cat 1>&2) | xclip -in -selection clipboard
 }
 
+dr()
+{
+    cd "$(dirname "$(realpath "$1")")"
+}
+
 # Create a fresh temp directory for today and copy its name to the clipboard.
 # cd there if an argument is passed.
 tmp()
