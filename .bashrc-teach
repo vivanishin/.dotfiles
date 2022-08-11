@@ -31,6 +31,7 @@ init-asm()
     cd "$dir"
     ln -sf ../io.inc
     ln -sf ../build_asm.sh
+    ln -sf ../macro.c
     ln -sf /mnt/co/books/sem/asm/intel386-psABI-1.1.pdf
 
     __teach_save_PS1="$PS1"
@@ -43,4 +44,5 @@ deinit-asm()
         export PS1="$__teach_save_PS1"
         __teach_save_PS1=
     fi
+    unset -f deinit-asm
 }
