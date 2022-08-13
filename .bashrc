@@ -73,6 +73,15 @@ gsh()
   git show ${@-HEAD}
 }
 
+ansi_colored()
+{
+    local text="$1"
+    local color="$2"
+    local start="\033[01;${color}m\]"
+    local end="\[\033[00m\]"
+    printf "%s%s%s" "$start" "$text" "$end"
+}
+
 # See http://eli.thegreenplace.net/2013/06/11/keeping-persistent-history-in-bash
 # for details.
 #
@@ -178,7 +187,9 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # Assume we have colorful terminal. (Else use this: PS1='[\u@\h \W]\$ ')
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1="$(ansi_colored '\u@\h' 32)"
+PS1="$PS1$(ansi_colored '\w' 34)\$ "
+
 
 # TODO: look for another way to test that ls and grep have the --color option
 # enable color support of ls and also add handy aliases
