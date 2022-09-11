@@ -77,7 +77,7 @@ ansi_colored()
 {
     local text="$1"
     local color="$2"
-    local start="\033[01;${color}m\]"
+    local start="\[\033[01;${color}m\]"
     local end="\[\033[00m\]"
     printf "%s%s%s" "$start" "$text" "$end"
 }
