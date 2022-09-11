@@ -156,7 +156,7 @@ for path in /opt/cuda-7.0.18RC/bin \
 	    ~/bin
 do
   [ ! -e "$path" ] && continue
-  echo $PATH | egrep -q "($path:|$path/:|$path$)" && continue
+  echo $PATH | grep -Eq "($path:|$path/:|$path$)" && continue
   if [ ! -w "$path" ]
   then
     PATH=$PATH:$path
@@ -198,7 +198,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    alias egrep='grep -E --color=auto'
 fi
 
 # some more ls aliases
