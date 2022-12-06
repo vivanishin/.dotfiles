@@ -48,6 +48,7 @@ do
   sleep 20s
 done &
 
+xset s off -dpms
 xset r rate 200 50
 qutebrowser&
 st -e tmux&
