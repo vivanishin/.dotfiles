@@ -93,7 +93,9 @@
   (progn
     ;(setq evil-magit-want-horizontal-movement t)
     (setq git-commit-summary-max-length 50)
-  (add-hook 'magit-revision-mode-hook 'bug-reference-mode)
+    (add-hook 'magit-revision-mode-hook 'bug-reference-mode)
+    (add-hook 'git-commit-mode-hook
+              (lambda () (set-fill-column 72)))
   :ensure t))
 
 (use-package projectile
