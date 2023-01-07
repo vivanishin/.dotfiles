@@ -10,7 +10,6 @@ config-files/dotfiles/emacs.d/*
 !config-files/dotfiles/emacs.d/init*.el
 !config-files/dotfiles/emacs.d/lisp/
 !config-files/dotfiles/emacs.d/lisp/*
-.vimperator/info
 .vim/.netrwhist
 bin/
 .repo/
