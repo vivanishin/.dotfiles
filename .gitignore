@@ -12,3 +12,5 @@ config-files/dotfiles/emacs.d/*
 !config-files/dotfiles/emacs.d/lisp/*
 .vimperator/info
 .vim/.netrwhist
+bin/
+.repo/
