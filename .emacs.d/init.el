@@ -272,24 +272,20 @@ the name of FILE in the current directory, suitable for creation"
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+   '("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
  '(org-startup-truncated nil)
  '(package-archives
-   (quote
-    (("melpa" . "http://melpa.org/packages/")
+   '(("melpa" . "http://melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/")
      ("marmalade" . "http://marmalade-repo.org/packages/")
-     ("org" . "http://orgmode.org/elpa/"))))
+     ("org" . "http://orgmode.org/elpa/")))
  '(package-selected-packages
-   (quote
-    (which-key projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ key-chord evil-search-highlight-persist highlight evil-leader pdf-tools magit use-package solarized-theme evil)))
+   '(which-key projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ key-chord evil-search-highlight-persist highlight evil-leader pdf-tools magit use-package solarized-theme evil))
  '(scheme-program-name "guile")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tramp-remote-path
-   (quote
-    ("/usr/local/bin" "/usr/bin" "/bin" tramp-default-remote-path)) nil (tramp))
+   '("/usr/local/bin" "/usr/bin" "/bin" tramp-default-remote-path) nil (tramp))
  '(wc-modeline-format "WC[%c/%tc]"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
