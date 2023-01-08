@@ -21,10 +21,12 @@ bin/
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/quickmarks
 .emacs.d/.last-package-update-day
+.config/qutebrowser/solarized-everything-css/
 .emacs.d/bookmarks
 .emacs.d/elpa/
 .emacs.d/lisp/gnus-init/
 .emacs.d/projectile-bookmarks.eld
+.emacs.d/projectile.cache
 .emacs.d/transient/
 .lesshst
 .local/
@@ -32,5 +34,6 @@ bin/
 .pki/
 .repo_.gitconfig.json
 .repoconfig/
+.vim/bundle/
 .viminfo
 .z
