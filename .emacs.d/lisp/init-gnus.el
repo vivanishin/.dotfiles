@@ -1,1 +1,1 @@
-/mnt/co/gnus-init/init-gnus.el
+gnus-init/init-gnus.el
