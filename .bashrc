@@ -157,12 +157,7 @@ for path in /opt/cuda-7.0.18RC/bin \
 do
   [ ! -e "$path" ] && continue
   echo $PATH | grep -Eq "($path:|$path/:|$path$)" && continue
-  if [ ! -w "$path" ]
-  then
-    PATH=$PATH:$path
-  else
-    echo "not adding $path to PATH"
-  fi
+  PATH=$PATH:$path
 done
 export PATH
 
