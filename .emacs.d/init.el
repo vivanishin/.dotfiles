@@ -218,6 +218,7 @@ the name of FILE in the current directory, suitable for creation"
 (require 'python-mode)
 (require 'tex-mode)
 (require 'make-mode)
+(require 'gn-mode)
 (modify-syntax-entry ?_ "w" c-mode-syntax-table)
 (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
 (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)
