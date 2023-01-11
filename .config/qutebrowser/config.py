@@ -1147,7 +1147,7 @@ c.input.insert_mode.auto_load = True
 
 ## Padding (in pixels) for the statusbar.
 ## Type: Padding
-# c.statusbar.padding = {'top': 1, 'bottom': 1, 'left': 0, 'right': 0}
+c.statusbar.padding = {'top': 15, 'bottom': 1, 'left': 0, 'right': 0}
 
 ## Position of the status bar.
 ## Type: VerticalPosition
@@ -1248,7 +1248,7 @@ c.tabs.mode_on_change = 'restore'
 
 ## Padding (in pixels) around text for tabs.
 ## Type: Padding
-# c.tabs.padding = {'top': 0, 'bottom': 0, 'left': 5, 'right': 5}
+c.tabs.padding = {'top': 5, 'bottom': 0, 'left': 5, 'right': 5}
 
 ## Shrink pinned tabs down to their contents.
 ## Type: Bool
