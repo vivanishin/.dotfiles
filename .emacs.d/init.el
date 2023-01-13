@@ -205,7 +205,7 @@ the name of FILE in the current directory, suitable for creation"
 (setq column-number-mode t)
 (setq initial-scratch-message nil)
 (setq-default indent-tabs-mode nil)
-(setq-default c-default-style "gnu")
+(setq-default c-default-style "linux")
 (setq-default comment-multi-line t)
 (setq-default comment-style 'extra-line)
 (c-set-offset 'case-label '+)
