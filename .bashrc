@@ -228,6 +228,7 @@ alias cdd='cd `pwd`'
 alias qwer='cd /home/ivladak/src/gcc-gomp'
 alias bd="$EDITOR ~/bin/build-default.sh"
 alias rc="$EDITOR ~/.bashrc"
+alias svim="sudo -E $EDITOR"
 alias rcre=". ~/.bashrc"
 
 alias ga='gdb --args'
