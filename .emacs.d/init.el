@@ -264,7 +264,9 @@ the name of FILE in the current directory, suitable for creation"
   kept-old-versions 5    ; and how many of the old
   )
 
-
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;;; ------------------------------------------------------------
 (custom-set-variables

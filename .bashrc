@@ -20,6 +20,16 @@ dr()
     cd "$(dirname "$(realpath "$1")")"
 }
 
+e()
+{
+    emacsclient "$@" & disown
+}
+
+ec()
+{
+    e -c "$@"
+}
+
 # Create a fresh temp directory for today and copy its name to the clipboard.
 # cd there if an argument is passed.
 tmp()
@@ -206,9 +216,6 @@ alias tre='pstree -apl | less'
 alias j='jobs'
 alias v='vim'
 alias vi='vim'
-alias e='emacsclient'
-alias ec='emacsclient -c'
-alias et='emacsclient -t'
 
 alias ta='tmux a -t'
 alias td='tmux detach'
