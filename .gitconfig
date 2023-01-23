@@ -4,7 +4,6 @@
 [color]
 	ui = auto
 [alias]
-	checkout = co
 	co = checkout
 	graph = "log --branches=* --graph --oneline --decorate --date-order"
 
