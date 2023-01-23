@@ -15,6 +15,9 @@
         auto-package-update-interval 4)
   (auto-package-update-maybe))
 
+(desktop-save-mode)
+(setq desktop-auto-save-timeout (* 60 20))
+
 ;;; ------------------------------------------------------------
 ;;; Language, encoding, locale...
 (define-coding-system-alias 'UTF-8 'utf-8)
