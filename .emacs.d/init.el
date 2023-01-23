@@ -246,8 +246,8 @@ the name of FILE in the current directory, suitable for creation"
 (modify-syntax-entry ?- "w" makefile-mode-syntax-table)
 
 
-;; TODO: Remove sensitive data and check in init-gnus.el
-(require 'init-gnus)
+(when (equal (system-name) "archbook")
+  (require 'init-gnus))
 
 ;;; ------------------------------------------------------------
 ;;; The rest of my key mappings. Makes sense to put it after all package loads.
