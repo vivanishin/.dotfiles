@@ -129,8 +129,9 @@
   :ensure t
 
   :init
-  (setq evil-undo-system 'undo-tree)
-  (setq evil-want-keybinding nil)
+  (progn
+    (setq evil-undo-system 'undo-tree)
+    (setq evil-want-keybinding nil))
 
   :config
 
