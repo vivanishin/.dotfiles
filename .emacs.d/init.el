@@ -220,12 +220,16 @@ the name of FILE in the current directory, suitable for creation"
 (require 'tex-mode)
 (require 'make-mode)
 (require 'gn-mode)
+(require 'llvm-mode)
+(require 'tablegen-mode)
 (modify-syntax-entry ?_ "w" c-mode-syntax-table)
 (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
 (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)
 (modify-syntax-entry ?_ "w" python-mode-syntax-table)
 (with-eval-after-load 'asm-mode
   (modify-syntax-entry ?_ "w" asm-mode-syntax-table))
+(with-eval-after-load 'llvm
+  (modify-syntax-entry ?_ "w" llvm-mode-syntax-table))
 (with-eval-after-load 'org
   (modify-syntax-entry ?_ "w" org-mode-syntax-table))
 
