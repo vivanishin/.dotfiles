@@ -276,4 +276,6 @@ then
 fi
 
 . ~/.bashrc-teach
-. ~/.bashrc-local
+if [ -f ~/.bashrc-local ]; then
+    . ~/.bashrc-local
+fi

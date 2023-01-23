@@ -11,8 +11,14 @@ config-files/dotfiles/emacs.d/*
 !config-files/dotfiles/emacs.d/lisp/*
 .vim/.netrwhist
 
+.authinfo*
+.*_history
+
+ARCHBOOK/
+Downloads/
+News/
+
 bin/
-.repo/
 
 .Xauthority
 .bash_history
@@ -20,20 +26,30 @@ bin/
 .config/gh/
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/quickmarks
+.config/QtProject.conf
 .emacs.d/.last-package-update-day
+.gnupg/
 .config/qutebrowser/solarized-everything-css/
+.emacs.d/.emacs.desktop*
 .emacs.d/bookmarks
 .emacs.d/elpa/
+.emacs.d/eshell/
 .emacs.d/lisp/gnus-init/
+.emacs.d/network-security.data
 .emacs.d/projectile-bookmarks.eld
 .emacs.d/projectile.cache
+.emacs.d/tramp
 .emacs.d/transient/
 .lesshst
 .local/
+.mozilla/
 .persistent_history
 .pki/
 .repo_.gitconfig.json
+.repo/
 .repoconfig/
 .vim/bundle/
 .viminfo
+.vpn/
+.wget-hsts
 .z
