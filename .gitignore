@@ -3,13 +3,6 @@
 *.pyc
 config.py
 !.config/qutebrowser/config.py
-mailing-list-archives/gcc-ml/gcc.gnu.org/*
-config-files/dotfiles/emacs.d/*
-
-!config-files/dotfiles/emacs.d/init*.el
-!config-files/dotfiles/emacs.d/lisp/
-!config-files/dotfiles/emacs.d/lisp/*
-.vim/.netrwhist
 
 .authinfo*
 .*_history
@@ -45,9 +38,10 @@ bin/
 .mozilla/
 .persistent_history
 .pki/
-.repo_.gitconfig.json
 .repo/
+.repo_.gitconfig.json
 .repoconfig/
+.vim/.netrwhist
 .vim/bundle/
 .viminfo
 .vpn/
