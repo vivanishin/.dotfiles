@@ -246,7 +246,9 @@ the name of FILE in the current directory, suitable for creation"
 (modify-syntax-entry ?- "w" makefile-mode-syntax-table)
 
 
-(when (equal (system-name) "archbook")
+(when (or
+       (equal (system-name) "archbook")
+       (equal (system-name) "mikes"))
   (require 'init-gnus))
 
 ;;; ------------------------------------------------------------
