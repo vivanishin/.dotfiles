@@ -175,7 +175,7 @@ in presence of links. If it does not find FILE, then it shall return
 the name of FILE in the current directory, suitable for creation"
   (let ((root (expand-file-name "/")))
     (expand-file-name file
-                      (loop
+                      (cl-loop
                        for d = default-directory then (expand-file-name ".." d)
                        if (file-exists-p (expand-file-name file d))
                        return d
