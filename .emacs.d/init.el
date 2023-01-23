@@ -109,11 +109,23 @@
   (add-to-list 'projectile-globally-ignored-directories ".vscode")
   (add-hook 'prog-mode-hook 'projectile-mode))
 
+(require 'vlad-util)
+
 (use-package eglot
   :ensure t
   :config
-  (add-to-list 'eglot-server-programs '((c++-mode c-mode)
-                                        . ("clangd" "--background-index"))))
+  (add-to-list 'eglot-server-programs
+               '((c++-mode c-mode)
+                 .
+                 (lambda (arg)
+                   (let ((os-release "/etc/os-release"))
+                     (cond ((and
+                             (file-exists-p os-release)
+                             (string-match-p
+                              "Ubuntu"
+                              (car (read-lines os-release))))
+                            '("clangd-14" "--background-index"))
+                           (t '("clangd"))))))))
 
 (use-package pdf-tools
   :ensure t)
