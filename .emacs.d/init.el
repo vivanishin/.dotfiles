@@ -320,3 +320,4 @@ the name of FILE in the current directory, suitable for creation"
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'narrow-to-region 'disabled nil)
