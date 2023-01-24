@@ -162,14 +162,7 @@ export CLICOLOR=YES
 
 export LD_LIBRARY_PATH=/home/ivladak/inst/lib:/usr/lib64:$HOME/local/lib64
 
-for path in /opt/cuda-7.0.18RC/bin \
-	    ~/bin
-do
-  [ ! -e "$path" ] && continue
-  echo $PATH | grep -Eq "($path:|$path/:|$path$)" && continue
-  PATH=$PATH:$path
-done
-export PATH
+. ~/.bash_profile
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
