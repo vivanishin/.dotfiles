@@ -12,14 +12,19 @@ Downloads/
 News/
 
 bin/
+local/
+workspace/
 
 .Xauthority
 .bash_history
 .cache/
+.config/**/QtProject.conf
+.config/dconf/
 .config/gh/
+.config/htop/
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/quickmarks
-.config/QtProject.conf
+.config/pulse/
 .emacs.d/.last-package-update-day
 .gnupg/
 .config/qutebrowser/solarized-everything-css/
@@ -41,6 +46,8 @@ bin/
 .repo/
 .repo_.gitconfig.json
 .repoconfig/
+.terminfo/
+.texlive/
 .vim/.netrwhist
 .vim/bundle/
 .viminfo
