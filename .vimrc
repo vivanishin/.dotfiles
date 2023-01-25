@@ -1,4 +1,3 @@
-execute pathogen#infect()
 set expandtab
 set background=dark
 :map <leader>gf :e <cfile><cr>
