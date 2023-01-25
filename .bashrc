@@ -269,6 +269,7 @@ then
 fi
 
 . ~/.bashrc-teach
+# These are supposed to be really small; they are not git-controlled.
 if [ -f ~/.bashrc-local ]; then
     . ~/.bashrc-local
 fi

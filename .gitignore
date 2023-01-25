@@ -17,6 +17,7 @@ workspace/
 
 .Xauthority
 .bash_history
+.bashrc-local
 .cache/
 .config/**/QtProject.conf
 .config/dconf/
