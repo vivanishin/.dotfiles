@@ -50,6 +50,7 @@ done &
 
 xset s off -dpms
 xset r rate 200 50
+numlockx &
 qutebrowser&
 st -e tmux&
 
