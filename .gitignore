@@ -16,6 +16,7 @@ local/
 workspace/
 
 .Xauthority
+.asoundrc*
 .bash_history
 .bashrc-local
 .cache/
