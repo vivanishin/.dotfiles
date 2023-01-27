@@ -15,10 +15,16 @@
         auto-package-update-interval 4)
   (auto-package-update-maybe))
 
-(when window-system
+(require 'server)
+
+(when (and window-system
+           (eq (cdr command-line-args) nil)
+           (not (server-running-p)))
   (desktop-save-mode)
   (setq desktop-auto-save-timeout (* 60 20)))
 
+(unless (server-running-p)
+  (server-start))
 ;;; ------------------------------------------------------------
 ;;; Language, encoding, locale...
 (define-coding-system-alias 'UTF-8 'utf-8)
@@ -288,10 +294,6 @@ the name of FILE in the current directory, suitable for creation"
   kept-new-versions 20   ; how many of the newest versions to keep
   kept-old-versions 5    ; and how many of the old
   )
-
-(require 'server)
-(unless (server-running-p)
-  (server-start))
 
 ;;; ------------------------------------------------------------
 (custom-set-variables
