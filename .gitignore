@@ -29,6 +29,7 @@ workspace/
 .config/pulse/
 .emacs.d/.last-package-update-day
 .gnupg/
+!.gnupg/gpg-agent.conf
 .config/qutebrowser/solarized-everything-css/
 .emacs.d/.emacs.desktop*
 .emacs.d/bookmarks
