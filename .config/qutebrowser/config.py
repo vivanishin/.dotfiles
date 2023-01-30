@@ -1363,6 +1363,7 @@ c.url.searchengines = {
   'gm':  'https://www.google.com/maps/search/?api=1&query={}',
   'ddg': 'https://duckduckgo.com/?q={}',
   'wa':  'https://wiki.archlinux.org/?search={}',
+  'aur': 'https://aur.archlinux.org/packages/{}',
   'ym':  'https://yandex.ru/maps/213/moscow/?mode=search&text={}',
   'm':   'https://yandex.ru/maps/213/moscow/?mode=search&text={}',
   'gr':  'https://www.goodreads.com/search?q={}',
