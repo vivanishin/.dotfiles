@@ -20,9 +20,33 @@ dr()
     cd "$(dirname "$(realpath "$1")")"
 }
 
+_emacsclients()
+{
+    local filespec
+    while read -r filespec _; do
+        local file=$(sed 's|:[0-9].*||' <<< "$filespec")
+        local linecol=$(sed -nr 's|^[^:]+:([0-9:]*).*$|+\1|p' <<< "$filespec")
+        emacsclient "${opts[@]}" "$linecol" "$file" & disown
+    done
+}
+
+# This can either take a single argument (to accomodate the ec usage below, it
+# also takes options starting with a dash), or read an arbitrary number of lines
+# from stdin. The input is matched for filename[:line[:colunm]]. Filenames are
+# not supposed to include whitespace. The remainder of each line is discarded
+# which allows to pipe the output of grep -n to this function.
 e()
 {
-    emacsclient "$@" & disown
+    local opts=()
+    while grep -q "^-" <<< "$1"; do
+        opts+=("$1")
+        shift
+    done
+    if [ $# -gt 0 ]; then
+        echo "$@" | _emacsclients
+    else
+        _emacsclients
+    fi
 }
 
 ec()
