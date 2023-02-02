@@ -186,8 +186,6 @@ export CLICOLOR=YES
 
 export LD_LIBRARY_PATH=/home/ivladak/inst/lib:/usr/lib64:$HOME/local/lib64
 
-. ~/.bash_profile
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth

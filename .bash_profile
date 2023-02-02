@@ -11,3 +11,7 @@ do
     fi
 done
 export PATH
+
+if [ -f ~/.bashrc ]; then
+   . ~/.bashrc
+fi
