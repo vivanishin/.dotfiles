@@ -165,7 +165,7 @@ PROMPT_COMMAND="run_on_prompt_command"
 export HISTTIMEFORMAT="%F %T  "
 
 # This should go after other modifications of PROMPT_COMMAND (or these other
-# modifications should append rather that rewrite the variable).
+# modifications should append rather than rewrite the variable).
 . /home/vlad/bin/z/z.sh
 
 # Source global definitions
