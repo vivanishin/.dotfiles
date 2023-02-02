@@ -26,7 +26,7 @@ _emacsclients()
     while read -r filespec _; do
         local file=$(sed 's|:[0-9].*||' <<< "$filespec")
         local linecol=$(sed -nr 's|^[^:]+:([0-9:]*).*$|+\1|p' <<< "$filespec")
-        emacsclient "${opts[@]}" "$linecol" "$file" & disown
+        emacsclient "${opts[@]}" $linecol "$file" & disown
     done
 }
 
