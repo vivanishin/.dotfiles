@@ -316,6 +316,7 @@ the name of FILE in the current directory, suitable for creation"
  '(tramp-remote-path
    '("/usr/local/bin" "/usr/bin" "/bin" tramp-default-remote-path) nil (tramp))
  '(undo-tree-history-directory-alist '(("." . "~/.emacs.d/transient") ("" . "")))
+ '(vc-follow-symlinks t)
  '(wc-modeline-format "WC[%c/%tc]"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
