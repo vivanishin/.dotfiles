@@ -11,3 +11,5 @@
 	excludesfile = /home/vlad/.gitignore-global
 [diff]
 	algorithm = patience
+[pull]
+	rebase = interactive
