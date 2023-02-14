@@ -2,6 +2,7 @@ set history filename ~/.gdb_history
 set history save on
 set debuginfod enabled on
 set disassembly-flavor intel
+set index-cache enabled on
 set pagination off
 #set history size unlimited
 set print elements 0
@@ -22,5 +23,3 @@ alias dd = dump-tree
 
 add-auto-load-safe-path /mnt/bld/gcc-*/gcc-gomp-host/gcc/
 add-auto-load-safe-path /mnt/bld/gcc-*/gcc/
-
-set index-cache on
