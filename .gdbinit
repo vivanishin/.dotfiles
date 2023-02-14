@@ -1,5 +1,6 @@
 set history filename ~/.gdb_history
 set history save on
+set debuginfod enabled on
 set disassembly-flavor intel
 set pagination off
 #set history size unlimited
