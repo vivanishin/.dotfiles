@@ -59,7 +59,7 @@ workspace/
 .emacs.d/bookmarks
 .emacs.d/elpa/
 .emacs.d/eshell/
-.emacs.d/lisp/gnus-init/
+.emacs.d/lisp/init-gnus.el
 .emacs.d/network-security.data
 .emacs.d/projectile-bookmarks.eld
 .emacs.d/projectile.cache
