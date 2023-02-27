@@ -137,6 +137,9 @@
                             '("clangd-14" "--background-index"))
                            (t '("clangd"))))))))
 
+(use-package clang-format
+  :ensure t)
+
 (use-package pdf-tools
   :ensure t)
 
