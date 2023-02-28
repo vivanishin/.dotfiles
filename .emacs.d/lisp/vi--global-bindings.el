@@ -3,6 +3,7 @@
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "<f6>") 'flyspell-buffer)
 (global-set-key (kbd "<f7>") (lambda () (interactive) (recompile)))
+(global-set-key (kbd "<f8>") 'kill-current-buffer)
 (global-set-key (kbd "<f9>") 'kill-current-buffer)
 
 ;;; ------------------------------------------------------------
