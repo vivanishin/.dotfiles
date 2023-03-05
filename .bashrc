@@ -54,6 +54,29 @@ ec()
     e -c "$@"
 }
 
+# TODO: [compare]: vimdiff <(filter file1) <(filter file2)
+
+# Streamline the `vim $(which foo)` pattern.
+see()
+{
+    local path filter
+    path=$(which "$1") || return
+    case "$(file "$path")" in
+        *text*)
+            # Hack to load e.g. the 'e' function.
+            filter=". ~/.bashrc; $EDITOR %"
+            ;;
+        *executable*)
+            # TODO: also, readelf -a; perhaps allow to select (interactively?)
+            filter="ls -l --color=auto %; file %"
+            ;;
+        *data*)
+            filter="hexdump -C %"
+            ;;
+    esac
+    echo "$path" | xargs -o -I % "$SHELL" -c "$filter"
+}
+
 # Create a fresh temp directory for today and copy its name to the clipboard.
 # cd there if an argument is passed.
 tmp()
