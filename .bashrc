@@ -260,6 +260,7 @@ alias td='tmux detach'
 alias tn='tmux new-session -s'
 alias tls='tmux ls'
 
+alias cln='git clone'
 alias gs='git status'
 alias gsn='git status --untracked=no'
 alias gl='git log'
