@@ -209,6 +209,8 @@ export CLICOLOR=YES
 
 export LD_LIBRARY_PATH=/home/ivladak/inst/lib:/usr/lib64:$HOME/local/lib64
 
+export LC_TIME=C.UTF-8
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
