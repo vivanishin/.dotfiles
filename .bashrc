@@ -114,6 +114,20 @@ killexcept()
   rm $tmpfile
 }
 
+touch-script()
+{
+    if [ ! -s "$1" ]; then
+        cat <<- EOF > "$1"
+	#!/bin/bash
+
+	EOF
+    fi
+    cat "$1"
+    cat - >> "$1"
+    chmod +x "$1"
+    touch "$1"
+}
+
 dounset()
 {
   unset LIBRARY_PATH
