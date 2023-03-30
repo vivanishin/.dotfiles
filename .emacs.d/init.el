@@ -282,6 +282,7 @@ the name of FILE in the current directory, suitable for creation"
 
 (when (or
        (equal (system-name) "archbook")
+       (equal (system-name) "vlad-optiplex")
        (equal (system-name) "mikes"))
   (require 'init-gnus))
 
@@ -309,6 +310,8 @@ the name of FILE in the current directory, suitable for creation"
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))
+ '(gnus-read-newsrc-file nil)
+ '(gnus-save-newsrc-file nil)
  '(org-startup-truncated nil)
  '(package-archives
    '(("melpa" . "http://melpa.org/packages/")
