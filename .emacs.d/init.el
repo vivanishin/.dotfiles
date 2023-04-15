@@ -251,6 +251,7 @@ the name of FILE in the current directory, suitable for creation"
 (require 'gn-mode)
 (require 'llvm-mode)
 (require 'tablegen-mode)
+(require 'perl-mode)
 (modify-syntax-entry ?_ "w" c-mode-syntax-table)
 (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
 (modify-syntax-entry ?_ "w" makefile-mode-syntax-table)
