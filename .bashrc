@@ -339,6 +339,28 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+essential-defs()
+{
+    {
+        for d in ll la l L j \
+                    up cdd \
+                    cln gs gsn gl gd gg \
+                    oh re; do
+            case $(type $d | head -1) in
+                *'alias'*)
+                    alias "$d"
+                    ;;
+                *'function'*)
+                    declare -fp "$d"
+                    ;;
+                *)
+                    echo >&2 "$d is neither alias nor function"
+                    ;;
+            esac
+        done
+    } | clip
+}
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
