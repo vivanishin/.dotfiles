@@ -90,6 +90,27 @@ tmp()
     [ -n "$1" ] && cd "$dir"
 }
 
+tokib()
+{
+    local x
+    read -r x
+    echo $((x / 1024))
+}
+
+tomib()
+{
+    local x
+    read -r x
+    echo $(( $(echo $x | tokib) / 1024))
+}
+
+togib()
+{
+    local x
+    read -r x
+    echo $(( $(echo $x | tomib) / 1024))
+}
+
 # Kill all background processes of this shell except for the given space-separated list.
 killexcept()
 {
