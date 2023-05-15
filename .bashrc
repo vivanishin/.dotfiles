@@ -162,7 +162,7 @@ dounset()
 unalias gsh > /dev/null 2>&1
 gsh()
 {
-  git show "${@-HEAD}"
+  git show "${@:-HEAD}"
 }
 
 ansi_colored()
