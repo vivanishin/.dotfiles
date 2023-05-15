@@ -344,7 +344,7 @@ essential-defs()
     {
         for d in ll la l L j \
                     up cdd \
-                    cln gs gsn gl gd gg \
+                    cln gs gsn gl gd gg gsh \
                     oh re; do
             case $(type $d | head -1) in
                 *'alias'*)
