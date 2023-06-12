@@ -78,10 +78,6 @@
 (use-package highlight
   :ensure t)
 
-;; TODO: https://github.com/noctuid/lispyville
-(use-package lispy
-  :ensure t)
-
 (use-package python-mode
   :ensure t)
 
