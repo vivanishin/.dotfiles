@@ -38,6 +38,8 @@
     (kbd "C-w C-w") 'other-window)
 
   ;; Global bindings.
+  ; Make 'x' a nop; remove to rebind to deletechar when ready.
+  (evil-define-key 'normal global-map (kbd "x")    'evil-normal-state)
   (evil-define-key 'normal global-map (kbd "C-f")  'evil-scroll-down)
   (evil-define-key 'normal global-map (kbd "C-u")  'evil-scroll-up)
   (evil-define-key 'normal global-map (kbd "z z")  'evil-write)
@@ -67,7 +69,17 @@
     "gg" 'projectile-grep
     "bl" 'toggle-blame-mode
     "3" 'evil-search-word-backward
-    "8" 'evil-search-word-forward))
-
+    "8" 'evil-search-word-forward
+    ;; Window management.
+    "h"  (balanced 'split-window-below)
+    "l"  (balanced 'split-window-right)
+    "0"  (balanced 'delete-window)
+    "1"  'delete-other-windows
+    "xw" 'rotate-windows
+    "52" 'make-frame-command
+    "50" 'safe-delete-frame
+    "o"  'mode-line-other-buffer
+    "xb" 'ido-switch-buffer
+    "j"  'ido-switch-buffer))
 
 (provide 'init-evil)

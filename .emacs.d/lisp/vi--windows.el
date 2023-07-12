@@ -35,25 +35,4 @@
             (set-window-buffer-start-and-point w1 b2 s2 p2)
             (set-window-buffer-start-and-point w2 b1 s1 p1)))))))
 
-(use-package key-chord
-  :ensure t
-  :config
-  (key-chord-mode 1)
-
-  (key-chord-define-global "x1" 'delete-other-windows)
-  (key-chord-define-global "x2" (balanced 'split-window-below))
-  (key-chord-define-global "x3" (balanced 'split-window-right))
-  (key-chord-define-global "x0" (balanced 'delete-window))
-  (key-chord-define-global "xo" 'mode-line-other-buffer)
-  (key-chord-define-global "xj" 'next-multiframe-window)
-  (key-chord-define-global "xk" 'previous-multiframe-window)
-  (key-chord-define-global "xw" 'rotate-windows)
-  (key-chord-define-global "5o" 'other-frame)
-  (key-chord-define-global "52" 'make-frame-command)
-  (key-chord-define-global "50" 'safe-delete-frame)
-  (key-chord-define-global "xb" 'ido-switch-buffer)
-  (key-chord-define-global "xs" 'save-buffer)
-  (key-chord-define-global "xf" 'ido-find-file)
-  (key-chord-define-global "xv" 'ido-find-alternate-file))
-
 (provide 'vi--windows)

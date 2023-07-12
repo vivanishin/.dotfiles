@@ -316,7 +316,7 @@ the name of FILE in the current directory, suitable for creation"
      ("gnu" . "http://elpa.gnu.org/packages/")
      ("org" . "http://orgmode.org/elpa/")))
  '(package-selected-packages
-   '(nasm-mode which-key projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ key-chord evil-search-highlight-persist highlight evil-leader pdf-tools magit use-package solarized-theme evil))
+   '(nasm-mode which-key projectile dired cquery auto-package-update flycheck lsp-mode ggtags wc-mode default-text-scale python-info bbdb grep-a-lot lispy dired-x paredit evil-paredit image+ evil-search-highlight-persist highlight evil-leader pdf-tools magit use-package solarized-theme evil))
  '(scheme-program-name "guile")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
