@@ -38,8 +38,6 @@
     (kbd "C-w C-w") 'other-window)
 
   ;; Global bindings.
-  ; Make 'x' a nop; remove to rebind to deletechar when ready.
-  (evil-define-key 'normal global-map (kbd "x")    'evil-normal-state)
   (evil-define-key 'normal global-map (kbd "C-f")  'evil-scroll-down)
   (evil-define-key 'normal global-map (kbd "C-u")  'evil-scroll-up)
   (evil-define-key 'normal global-map (kbd "z z")  'evil-write)
