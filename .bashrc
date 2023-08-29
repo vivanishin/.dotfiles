@@ -345,6 +345,7 @@ essential-defs()
     {
         for d in ll la l L j \
                     up cdd \
+                    cgrep \
                     cln gs gsn gl gd gds gsd gg gsh \
                     oh re; do
             case $(type $d | head -1) in
