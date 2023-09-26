@@ -20,11 +20,11 @@
 (when (and window-system
            (eq (cdr command-line-args) nil)
            (not (server-running-p)))
+  (message "This is the main instance (%d). Starting emacs server." (emacs-pid))
+  (server-start)
   (desktop-save-mode)
   (setq desktop-auto-save-timeout (* 60 20)))
 
-(unless (server-running-p)
-  (server-start))
 ;;; ------------------------------------------------------------
 ;;; Language, encoding, locale...
 (define-coding-system-alias 'UTF-8 'utf-8)
