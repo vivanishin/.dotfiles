@@ -141,6 +141,11 @@ touch-script()
         cat <<- EOF > "$1"
 	#!/bin/bash
 
+	die()
+	{
+	    [ \$# -gt 0 ] && echo >&2 "\$@"
+	    exit 1
+	}
 	EOF
     fi
     cat "$1"
