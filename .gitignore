@@ -50,7 +50,7 @@ workspace/
 .config/teamviewer/
 .config/zoomus.conf
 .cups/
-.gnupg/
+.gnupg/*
 !.gnupg/gpg-agent.conf
 .config/qutebrowser/solarized-everything-css/
 .electrum/
