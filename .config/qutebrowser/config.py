@@ -1414,7 +1414,7 @@ config.bind('<Ctrl-p>', 'tab-prev')
 config.bind(';t', 'hint all tab-fg')
 config.bind('Y', 'spawn instapaper {url};; message-info "added {url}"')
 config.bind('e', 'config-source')
-config.bind('X', 'config-cycle --temp --print content.proxy socks://127.0.0.1:9050 system')
+config.bind('X', 'config-cycle --temp --print content.proxy socks://127.0.0.1:5050 system')
 config.bind('<F1>', 'config-cycle --temp tabs.show multiple switching')
 config.bind('<Ctrl-R>',
             'config-cycle content.user_stylesheets '
