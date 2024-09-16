@@ -232,6 +232,7 @@ the name of FILE in the current directory, suitable for creation"
 (setq tramp-default-method "scp")
 (setq enable-remote-dir-locals t)
 (setq column-number-mode t)
+(setq calendar-week-start-day 1)  ; TODO customize this variable instead?
 (setq initial-scratch-message nil)
 (setq-default indent-tabs-mode nil)
 (setq-default c-default-style "linux")
