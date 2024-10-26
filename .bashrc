@@ -179,6 +179,13 @@ ansi_colored()
     printf "%s%s%s" "$start" "$text" "$end"
 }
 
+error_code()
+{
+    local e=$?
+    (( e )) && printf "%s|" "$e"
+    return $e
+}
+
 # See http://eli.thegreenplace.net/2013/06/11/keeping-persistent-history-in-bash
 # for details.
 #
@@ -270,7 +277,8 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # Assume we have colorful terminal. (Else use this: PS1='[\u@\h \W]\$ ')
-PS1="$(ansi_colored '\u@\h' 32)"
+PS1='$(error_code)'
+PS1="$PS1$(ansi_colored '\u@\h' 32)"
 PS1="$PS1$(ansi_colored '\w' 34)\$ "
 
 
