@@ -20,6 +20,13 @@ dr()
     cd "$(dirname "$(realpath "$1")")"
 }
 
+man()
+{
+    local env=
+    [ $COLUMNS -gt 80 ] && env="COLUMNS=80"
+    env $env man "$@"
+}
+
 _emacsclients()
 {
     local filespec
