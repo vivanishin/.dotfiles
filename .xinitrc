@@ -57,4 +57,4 @@ numlockx &
 qutebrowser&
 st -e tmux&
 
-exec dwm 2> /tmp/log.dwm 1>&2
+exec i3 >/tmp/log.i3 2>&1
