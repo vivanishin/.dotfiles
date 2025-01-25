@@ -349,6 +349,8 @@ alias crontab='crontab -i'
 alias sshowfind='showfind -s'
 alias mplayer='mplayer -af scaletempo'
 alias yt='yt-dlp --cookies-from-browser chromium:~/.local/share/qutebrowser'
+alias yts='yt -o "%(playlist_index)s:%(title)s.%(ext)s" &>/dev/null'
+alias ytp='yt -f bestvideo.2+bestaudio --proxy socks://127.0.0.1:5050 &>/dev/null'
 alias fej='find . -type f -print0 -iname \*.jpg -o -iname \*.jpeg | sort -z | xargs -0 feh -Z --auto-rotate --scale-down'
 alias clip="xclip -in -selection clipboard"
 
