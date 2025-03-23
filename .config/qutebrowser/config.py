@@ -1370,6 +1370,7 @@ c.url.searchengines = {
   'm':   'https://yandex.ru/maps/213/moscow/?mode=search&text={}',
   'gr':  'https://www.goodreads.com/search?q={}',
   'w':   'https://en.wikipedia.org/wiki/Special:Search/{}',
+  'p':   'https://www.perplexity.ai/search?q={}',
 }
 
 ## Page(s) to open at the start.
