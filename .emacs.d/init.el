@@ -144,6 +144,9 @@
   :config
   (grep-a-lot-setup-keys))
 
+(use-package undo-fu
+  :ensure t)
+
 (use-package yaml-mode
   :mode "\\.yml\\'"
   :ensure t)
@@ -152,9 +155,8 @@
   :ensure t
 
   :init
-  (progn
-    (setq evil-undo-system 'undo-redo)
-    (setq evil-want-keybinding nil))
+  (setq evil-undo-system 'undo-fu)
+  (setq evil-want-keybinding nil)
 
   :config
 
