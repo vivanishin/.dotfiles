@@ -149,7 +149,9 @@
 
 (use-package yaml-mode
   :mode "\\.yml\\'"
-  :ensure t)
+  :ensure t
+  :config
+  (modify-syntax-entry ?_ "w" yaml-mode-syntax-table))
 
 (use-package evil
   :ensure t
@@ -256,7 +258,6 @@ the name of FILE in the current directory, suitable for creation"
 (modify-syntax-entry ?_ "w" cmake-mode-syntax-table)
 (modify-syntax-entry ?_ "w" python-mode-syntax-table)
 (modify-syntax-entry ?_ "w" perl-mode-syntax-table)
-(modify-syntax-entry ?_ "w" yaml-mode-syntax-table)
 (with-eval-after-load 'asm-mode
   (modify-syntax-entry ?_ "w" asm-mode-syntax-table))
 (with-eval-after-load 'llvm
