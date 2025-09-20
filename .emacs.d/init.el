@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t -*-
 (require 'package)
+(setq url-proxy-services
+      '(("no_proxy" . "^\\(localhost\\|10\\..*\\)")
+        ("http" . "127.0.0.1:5050")
+        ("https" . "127.0.0.1:5050")))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (package-initialize)
