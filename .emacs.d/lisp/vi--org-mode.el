@@ -46,4 +46,8 @@
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-<") 'org-begin-template))
 
+;; Hide DONE items from agenda.
+(setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-skip-timestamp-if-done t)
+
 (provide 'vi--org-mode)
