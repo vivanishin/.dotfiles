@@ -8,6 +8,8 @@
 <Multi_key> <p> <p>                 	: "ping ya.ru"
 <Multi_key> <w> <f>                 	: "sudo wifi-menu"
 <Multi_key> <p> <i>                     : "π"   U03C0    # GREEK SMALL LETTER PI
+<Multi_key> <n> <o>              	: "❌"   U274C    # Cross Mark
+<Multi_key> <o> <k>              	: "✓"   U2713    # Check Mark
 <Multi_key> <minus> <space>	 	: "— "   U2014   # EM DASH, SPACE
 
 include "%H/.priv/xcompose"
