@@ -1,10 +1,14 @@
 ;; -*- lexical-binding: t -*-
 (require 'package)
-(setq url-proxy-services
-      '(("no_proxy" . "^\\(localhost\\|10\\..*\\)")
-        ("http" . "127.0.0.1:5050")
-        ("https" . "127.0.0.1:5050")))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(require 'socks)
+(setq url-gateway-method 'socks)
+(setq socks-server '("default"    ;; name
+		     "localhost"  ;; host
+                     5050         ;; port
+                     5))          ;; version (5 for SOCKS5)
+(setq url-proxy-services nil)
+
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (package-initialize)
 
