@@ -42,6 +42,9 @@
 (use-package solarized-theme
   :ensure t)
 
+(use-package htmlize
+  :ensure t)
+
 (when window-system
  (require 'solarized)
  (load-theme 'solarized-dark t) ;wombat; misterioso; wheatgrass
