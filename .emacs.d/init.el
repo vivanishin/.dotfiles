@@ -1,14 +1,11 @@
 ;; -*- lexical-binding: t -*-
 (require 'package)
-(require 'socks)
-(setq url-gateway-method 'socks)
-(setq socks-server '("default"    ;; name
-		     "localhost"  ;; host
-                     5050         ;; port
-                     5))          ;; version (5 for SOCKS5)
+(setq package-archives
+ '(("melpa" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/")
+   ("org"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/")
+   ("gnu"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/")))
 (setq url-proxy-services nil)
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (package-initialize)
 
