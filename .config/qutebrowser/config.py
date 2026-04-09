@@ -1406,6 +1406,8 @@ c.zoom.default = '200%'
 ## Type: Bool
 # c.zoom.text_only = False
 
+c.content.site_specific_quirks.enabled = True
+
 ## Bindings for normal mode
 config.bind('<Space>', 'scroll-page 0 1')
 config.bind('<Ctrl-E>', 'tab-clone')
