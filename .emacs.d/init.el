@@ -153,7 +153,11 @@
                               "Ubuntu"
                               (car (read-lines os-release))))
                             '("clangd-14" "--background-index"))
-                           (t '("clangd"))))))))
+                           (t '("clangd")))))))
+
+  (with-eval-after-load 'eglot
+    (evil-define-key 'normal eglot-mode-map
+      (kbd "=") #'eglot-format)))
 
 (use-package clang-format
   :ensure t)
