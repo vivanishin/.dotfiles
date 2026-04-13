@@ -127,7 +127,21 @@
 
 (use-package eglot
   :ensure t
+  :hook ((python-mode . eglot-ensure))
   :config
+  (add-to-list 'eglot-server-programs
+               '((python-mode python-ts-mode) . ("pylsp")))
+  (setq-default eglot-workspace-configuration
+                '((:pylsp
+                   . (:plugins
+                      (:pycodestyle (:enabled :json-false)
+                       :pyflakes (:enabled :json-false)
+                       :mccabe (:enabled :json-false)
+                       :flake8 (:enabled t)
+                       :black (:enabled t)
+                       :isort (:enabled :json-false)
+                       :autopep8 (:enabled :json-false)
+                       :rope_autoimport (:enabled t))))))
   (add-to-list 'eglot-server-programs
                '((c++-mode c-mode)
                  .
