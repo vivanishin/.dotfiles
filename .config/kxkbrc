@@ -1,5 +1,7 @@
 [Layout]
 DisplayNames=,
 LayoutList=ru,us
+Options=caps:ctrl_shifted_capslock
+ResetOldOptions=true
 Use=true
 VariantList=,
