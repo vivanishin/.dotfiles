@@ -1,2 +1,6 @@
+[Keyboard]
+RepeatDelay=200
+RepeatRate=50
+
 [Mouse]
 cursorTheme=capitaine-cursors
