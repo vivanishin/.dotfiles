@@ -1,0 +1,8 @@
+[Event/ConnectionActivated]
+Action=
+
+[Event/ConnectionDeactivated]
+Action=
+
+[Event/LimitedConnectivity]
+Action=

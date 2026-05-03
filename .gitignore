@@ -1,6 +1,7 @@
 *~
 *.bin
 *.pyc
+*.pem
 config.py
 !.config/qutebrowser/config.py
 
@@ -9,6 +10,7 @@ config.py
 
 ARCHBOOK/
 Downloads/
+Desktop/
 News/
 
 bin/
@@ -42,9 +44,11 @@ workspace/
 .config/kritadisplayrc
 .config/kritarc
 .config/libreoffice/
+.config/mozilla/firefox/
 .config/htop/
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/quickmarks
+.config/plasma-org.kde.plasma.desktop-appletsrc
 .config/pulse/
 .config/simple-scan/
 .config/teamviewer/
@@ -54,9 +58,11 @@ workspace/
 !.gnupg/gpg-agent.conf
 .config/qutebrowser/solarized-everything-css/
 .electrum/
+.emacs.d/*#*
 .emacs.d/.emacs.desktop*
 .emacs.d/.last-package-update-day
 .emacs.d/bookmarks
+.emacs.d/eln-cache/
 .emacs.d/elpa/
 .emacs.d/eshell/
 .emacs.d/lisp/init-gnus.el
@@ -66,6 +72,15 @@ workspace/
 .emacs.d/tramp
 .emacs.d/transient/
 
+.config/alacritty
+.config/gtkrc
+.config/gtkrc-2.0
+.gtkrc-2.0
+.config/gtk-3.0/
+!.config/gtk-3.0/settings.ini
+.config/gtk-4.0/
+!.config/gtk-4.0/settings.ini
+.config/libaccounts-glib/
 
 .lesshst
 .local/
@@ -78,8 +93,11 @@ workspace/
 .repoconfig/
 .terminfo/
 .texlive/
+.var/
 .vim/.netrwhist
 .vim/bundle/
+# Managed by repo; see .repo/manifests/default.xml
+.vim/pack/
 .viminfo
 .vpn/
 .wget-hsts
