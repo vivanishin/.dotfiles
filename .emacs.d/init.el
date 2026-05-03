@@ -271,6 +271,7 @@ the name of FILE in the current directory, suitable for creation"
 (require 'python-mode)
 (require 'tex-mode)
 (require 'make-mode)
+;; Comes from cmake package (arch). TODO: require conditionally.
 (require 'cmake-mode)
 (require 'gn-mode)
 (require 'llvm-mode)
