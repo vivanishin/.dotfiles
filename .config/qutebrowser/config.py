@@ -763,7 +763,7 @@ c.downloads.remove_finished = 1000 * 60 * 1
 ## Type: Encoding
 # c.editor.encoding = 'utf-8'
 
-c.fonts.default_size = '20pt'
+c.fonts.default_size = '16pt'
 
 ## Font used in the completion categories.
 ## Type: Font
