@@ -551,6 +551,9 @@ c.auto_save.session = True
 ## User agent to send. Unset to send the default.
 ## Type: String
 # c.content.headers.user_agent = None
+config.set('content.headers.user_agent',
+           'Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0',
+           'https://accounts.google.com/*')
 
 ## Enable host blocking.
 ## Type: Bool
