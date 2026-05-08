@@ -2,9 +2,8 @@
 Id_1=ce0b48f1-4cf4-473f-89b0-b14604a2fe9a
 Id_2=69dac856-d095-4b84-9fd9-4b65b407b992
 Id_3=31b2647e-f7da-4acc-84e7-13e72c8daabb
-Id_4=82d9803b-0682-4ed4-afe5-9963b4360a75
-Number=4
-Rows=2
+Number=3
+Rows=1
 
 [Effect-zoom]
 InitialZoom=1.2
@@ -68,7 +67,7 @@ padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][ce0b48f1-4cf4-473f-89b0-b14604a2fe9a][9909b912-85af-45eb-ad94-4c1ab4ee6359]
-padding=4
+padding=0
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Windows]
