@@ -10,7 +10,7 @@ PointerAcceleration=-0.400
 DisableEventsOnExternalMouse=false
 DisableWhileTyping=false
 NaturalScroll=true
-PointerAcceleration=0.600
+PointerAcceleration=0.500
 PointerAccelerationProfile=2
 
 [Libinput][2][10][TPPS/2 Elan TrackPoint]
