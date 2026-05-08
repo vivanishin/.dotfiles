@@ -2,5 +2,21 @@
 RepeatDelay=200
 RepeatRate=50
 
+[Libinput][1267][12693][ELAN0678:00 04F3:3195 Mouse]
+LeftHanded=true
+PointerAcceleration=-0.400
+
+[Libinput][1267][12693][ELAN0678:00 04F3:3195 Touchpad]
+DisableEventsOnExternalMouse=false
+DisableWhileTyping=false
+NaturalScroll=true
+PointerAcceleration=0.600
+PointerAccelerationProfile=2
+
+[Libinput][2][10][TPPS/2 Elan TrackPoint]
+PointerAcceleration=1.000
+PointerAccelerationProfile=1
+ScrollFactor=0.3
+
 [Mouse]
 cursorTheme=capitaine-cursors
