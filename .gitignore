@@ -12,6 +12,8 @@ config.py
 ARCHBOOK/
 Downloads/
 Desktop/
+Pictures/
+Videos/
 News/
 
 bin/
@@ -37,12 +39,15 @@ workspace/
 .config/darktable/
 .config/dconf/
 .config/deluge/
+.config/dolphinrc
 .config/enchant/
 .config/evince/
 .config/gconf/
 .config/gh/
+.config/gwenviewrc
 .config/inkscape/
 .config/kconf_updaterc
+.config/kolourpaintrc
 .config/konsolesshconfig
 .config/kritadisplayrc
 .config/kritarc
@@ -53,10 +58,11 @@ workspace/
 .config/qutebrowser/quickmarks
 .config/plasma-org.kde.plasma.desktop-appletsrc
 .config/spectaclerc
+.config/systemmonitorrc
 .config/pulse/
 .config/simple-scan/
 .config/teamviewer/
-.config/zoomus.conf
+.config/zoom*
 .cups/
 .gnupg/*
 !.gnupg/gpg-agent.conf
