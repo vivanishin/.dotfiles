@@ -2,6 +2,7 @@
 *.bin
 *.pyc
 *.pem
+\#*\#
 config.py
 !.config/qutebrowser/config.py
 
@@ -41,6 +42,8 @@ workspace/
 .config/gconf/
 .config/gh/
 .config/inkscape/
+.config/kconf_updaterc
+.config/konsolesshconfig
 .config/kritadisplayrc
 .config/kritarc
 .config/libreoffice/
@@ -49,6 +52,7 @@ workspace/
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/quickmarks
 .config/plasma-org.kde.plasma.desktop-appletsrc
+.config/spectaclerc
 .config/pulse/
 .config/simple-scan/
 .config/teamviewer/
