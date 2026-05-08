@@ -1,2 +1,72 @@
 [Global plugin config]
 manageProfile=false
+
+[SSH Config][earth]
+hostname=earth.ispras.ru
+identifier=earth
+importedFromSshConfig=true
+port=
+profileName=
+sshkey=~/.ssh/id-earth
+useSshConfig=true
+username=vlad
+
+[SSH Config][github.com]
+hostname=github.com
+identifier=github.com
+importedFromSshConfig=true
+port=
+profileName=Built-in
+sshkey=~/.ssh/github
+useSshConfig=true
+username=
+
+[SSH Config][gitlab.ispras.ru]
+hostname=gitlab.ispras.ru
+identifier=gitlab.ispras.ru
+importedFromSshConfig=true
+port=
+profileName=Built-in
+sshkey=~/.ssh/gitlab-ispras
+useSshConfig=true
+username=
+
+[SSH Config][kayry]
+hostname=kayry
+identifier=kayry
+importedFromSshConfig=true
+port=
+profileName=Built-in
+sshkey=~/.ssh/kayry
+useSshConfig=true
+username=vlad
+
+[SSH Config][optiplex]
+hostname=10.10.3.118
+identifier=optiplex
+importedFromSshConfig=true
+port=
+profileName=Built-in
+sshkey=~/.ssh/optiplex
+useSshConfig=true
+username=vlad
+
+[SSH Config][titan]
+hostname=10.10.3.43
+identifier=titan
+importedFromSshConfig=true
+port=
+profileName=Built-in
+sshkey=
+useSshConfig=true
+username=ivladak
+
+[SSH Config][vihara]
+hostname=10.10.3.38
+identifier=vihara
+importedFromSshConfig=true
+port=
+profileName=Built-in
+sshkey=~/.ssh/vihara
+useSshConfig=true
+username=vlad
