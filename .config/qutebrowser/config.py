@@ -14,8 +14,9 @@ hostname = socket.gethostname()
 ##   qute://help/configuring.html
 ##   qute://help/settings.html
 
-## Do not load settings done via the GUI.
-config.load_autoconfig(False)
+# Load ~/.config/qutebrowser/autoconfig.yml first to make the config.py settings
+# below override the former.
+config.load_autoconfig()
 
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
