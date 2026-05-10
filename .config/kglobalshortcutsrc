@@ -267,6 +267,9 @@ switch to next activity=,,Switch to Next Activity
 switch to previous activity=,,Switch to Previous Activity
 toggle do not disturb=none,,Toggle do not disturb
 
+[services][org.kde.konsole.desktop]
+_launch=Meta+Shift+Return\tMeta+Ctrl+Return\tCtrl+Alt+Return\tCtrl+Alt+T
+
 [services][org.kde.kscreen.desktop]
 ShowOSD=Display
 
