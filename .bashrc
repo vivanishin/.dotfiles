@@ -171,11 +171,65 @@ dounset()
   unset COLLECT_GCC_OPTIONS
 }
 
-unalias gsh > /dev/null 2>&1
-gsh()
+define_git_etc_func()
 {
-  git show "${@:-HEAD}"
+    local cmd=$1
+    local user_args='"$@"'
+    shift
+    args=()
+    case "$cmd" in
+        amend)
+            args+=(commit --amend "$user_args")
+            ;;
+        cln)
+            args+=(clone "$user_args")
+            ;;
+        gd)
+            args+=(diff "$user_args")
+            ;;
+        gds|gsd)
+            args+=(diff --staged "$user_args")
+            ;;
+        gg)
+            args+=(grep -n "$user_args")
+            ;;
+        gl)
+            args+=(log "$user_args")
+            ;;
+        gs)
+            args+=(status "$user_args")
+            ;;
+        gsh)
+            args+=(show '${@:-HEAD}')
+            ;;
+        gsn)
+            args+=(status --untracked=no "$user_args")
+            ;;
+        *)
+            echo >&2 "define_git_etc_func: $cmd not supported"
+            return
+            ;;
+    esac
+    eval "
+        $cmd()
+        {
+            local sudo=
+            [ "\$PWD" = /etc ] && sudo='sudo -E'
+            \$sudo git ${args[*]}
+        }
+    "
 }
+
+define_git_etc_func amend
+define_git_etc_func cln
+define_git_etc_func gd
+define_git_etc_func gds
+define_git_etc_func gg
+define_git_etc_func gl
+define_git_etc_func gs
+define_git_etc_func gsd
+define_git_etc_func gsh
+define_git_etc_func gsn
 
 ansi_colored()
 {
@@ -316,16 +370,7 @@ alias td='tmux detach'
 alias tn='tmux new-session -s'
 alias tls='tmux ls'
 
-alias cln='git clone'
-alias gs='git status'
-alias gsn='git status --untracked=no'
-alias gl='git log'
-alias gd='git diff'
-alias gg='git grep -n'
 alias rg='repo grep -n'
-alias amend='git commit --amend'
-alias gds='git diff --staged'
-alias gsd='git diff --staged'
 alias config='git --git-dir=$HOME/.dotfiles.git --work-tree=$HOME'
 
 alias cdd='cd `pwd`'
