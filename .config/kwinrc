@@ -31,12 +31,12 @@ padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][69dac856-d095-4b84-9fd9-4b65b407b992][65c868ed-221a-4456-8f71-939de4a6a49f]
-padding=4
-tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+padding=0
+tiles={"layoutDirection":"horizontal","tiles":[{"layoutDirection":"vertical","tiles":[{"height":0.5},{"height":0.5}],"width":0.4},{"width":0.6}]}
 
 [Tiling][69dac856-d095-4b84-9fd9-4b65b407b992][9909b912-85af-45eb-ad94-4c1ab4ee6359]
 padding=4
-tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.31757812500000004},{"width":0.682421875}]}
 
 [Tiling][82d9803b-0682-4ed4-afe5-9963b4360a75][65c868ed-221a-4456-8f71-939de4a6a49f]
 padding=4
@@ -68,7 +68,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Tiling][ce0b48f1-4cf4-473f-89b0-b14604a2fe9a][9909b912-85af-45eb-ad94-4c1ab4ee6359]
 padding=0
-tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.8484375},{"width":0.15156250000000004}]}
 
 [Windows]
 RollOverDesktops=true
