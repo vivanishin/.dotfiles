@@ -15,3 +15,6 @@
 	rebase = interactive
 [init]
 	defaultBranch = main
+
+[includeIf "gitdir:/mnt/co/safecompiler/"]
+    path = .gitconfig-work
