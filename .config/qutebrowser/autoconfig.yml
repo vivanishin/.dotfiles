@@ -15,6 +15,7 @@ settings:
     https://app.todoist.com: false
     https://www.youtube.com: false
   content.register_protocol_handler:
+    https://mail.google.com?extsrc=mailto&url=%25s: false
     https://mail.yandex.ru?mailto=%25s: false
   content.user_stylesheets:
     global: null
