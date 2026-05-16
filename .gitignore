@@ -51,6 +51,8 @@ workspace/
 .config/konsolesshconfig
 .config/kritadisplayrc
 .config/kritarc
+.config/kwinrc
+.config/kwinoutputconfig.json
 .config/libreoffice/
 .config/mozilla/firefox/
 .config/htop/
