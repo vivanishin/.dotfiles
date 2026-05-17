@@ -84,17 +84,31 @@ see()
     echo "$path" | xargs -o -I % "$SHELL" -c "$filter"
 }
 
+function clip()
+{
+    local cmd=(:)
+    if $(which wl-copy &>/dev/null); then
+        cmd=(wl-copy)
+    elif $(which xclip &>/dev/null); then
+        cmd=(xclip -in -selection clipboard)
+    else
+        echo >&2 "neither wl-copy, nor xclip found"
+        return 1
+    fi
+    "${cmd[@]}"
+}
+
 # Create a fresh temp directory for today and copy its name to the clipboard.
 # cd there if an argument is passed.
 tmp()
 {
     dir=/tmp/$(date +%m-%d)
     echo "$dir"
-    if $(which xclip &>/dev/null); then
-        printf " $dir " | xclip -in -selection clipboard
-    fi
+    printf " $dir " | clip 
     mkdir -p $dir
-    [ -n "$1" ] && cd "$dir"
+    if [ -n "$1" ]; then
+        cd "$dir"
+    fi
 }
 
 tokib()
@@ -395,8 +409,6 @@ alias sshowfind='showfind -s'
 alias mplayer='mplayer -af scaletempo'
 alias yt='yt.sh'
 alias fej='find . -type f -print0 -iname \*.jpg -o -iname \*.jpeg | sort -z | xargs -0 feh -Z --auto-rotate --scale-down'
-alias clip="xclip -in -selection clipboard"
-
 alias def=sdcv
 alias ]=xdg-open
 
