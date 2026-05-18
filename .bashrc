@@ -12,7 +12,7 @@ up() {
 
 cpath()
 {
-    realpath "${1:-.}" | tee >(cat 1>&2) | xclip -in -selection clipboard
+    realpath "${1:-.}" | tee >(cat 1>&2) | clip
 }
 
 dr()
