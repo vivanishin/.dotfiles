@@ -1,6 +1,6 @@
 # Usage
 
-Refer to https://github.com/ivladak/manifest/blob/main/README.md
+Refer to https://github.com/vivanishin/manifest/blob/main/README.md
 
 # TODO:
 - fix emacsclient stuff and mb start the daemon in xinitrc
