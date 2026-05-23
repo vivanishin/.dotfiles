@@ -49,6 +49,11 @@ with `git check-ignore -v <path>` before assuming it is tracked.
 - Plugin: `@opencode-ai/plugin` v1.15.4 at `~/.config/opencode/`
 - Current config is minimal — only sets `$schema`
 
+## Git commits
+
+**Never commit without explicit user approval.** Prepare the commit (stage files,
+draft the message) and show the plan, then wait for the go-ahead.
+
 ## No build/test/lint steps
 
 There are no commands to run for validation. After editing a dotfile:
