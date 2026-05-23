@@ -98,6 +98,11 @@ workspace/
 .emacs.d/transient/
 
 .config/alacritty
+.config/opencode/.gitignore
+.config/opencode/node_modules/
+.config/opencode/package.json
+.config/opencode/package-lock.json
+.config/opencode/bun.lock
 .config/gtkrc
 .config/gtkrc-2.0
 .gtkrc-2.0
