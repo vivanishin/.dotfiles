@@ -67,9 +67,16 @@ workspace/
 .config/spectaclerc
 .config/systemmonitorrc
 .config/pulse/
+.config/kate/
+.config/kate-externaltoolspluginrc
+.config/katerc
+.config/katevirc
+.config/ksmserverrc
 .config/session/dolphin_dolphin_dolphin
+.config/session/kwin_*
 .config/simple-scan/
 .config/teamviewer/
+.config/trashrc
 .config/zoom*
 .cups/
 .gnupg/*
@@ -100,9 +107,12 @@ workspace/
 !.config/gtk-4.0/settings.ini
 .config/libaccounts-glib/
 
+.ipython/
 .lesshst
 .local/
 .mozilla/
+.newsrc-dribble
+.npm/
 .persistent_history
 .pki/
 .priv/
