@@ -54,15 +54,22 @@ with `git check-ignore -v <path>` before assuming it is tracked.
 **Never commit without explicit user approval.** Prepare the commit (stage files,
 draft the message) and show the plan, then wait for the go-ahead.
 
+`git add -p` is preferred since the working tree is `$HOME` — staging
+individual hunks avoids accidentally staging unrelated home-directory changes.
+
+**If there are already staged changes, do not stage anything new without explicit
+approval.** The user may want to review `git diff` vs the index first.
+
 ## No build/test/lint steps
 
-There are no commands to run for validation. After editing a dotfile:
+**Do not run any state-changing commands** (e.g. `source`, daemon reloads,
+service restarts, `systemctl`, application restarts) without explicit user
+approval. File edits in the repo are fine to make directly.
+
+After editing a dotfile, suggest (but do not run) the appropriate follow-up:
 1. Source the file if it's shell config (`source ~/.bashrc` or `rcre` alias)
 2. Restart the relevant application if needed
 3. Commit with `git add -p` and `git commit`
-
-`git add -p` is preferred since the working tree is `$HOME` — staging
-individual hunks avoids accidentally staging unrelated home-directory changes.
 
 ## Key file locations
 
