@@ -66,7 +66,8 @@ individual hunks avoids accidentally staging unrelated home-directory changes.
 | `~/.bashrc` | Main shell config: aliases, functions, prompt, history |
 | `~/.bash_profile` | Login shell; sources `.bashrc`; prepends `~/bin` to `PATH` |
 | `~/.bashrc-teach` | Assembly course helpers (`init-asm` / `deinit-asm`) |
-| `~/.bashrc-local` | Machine-local overrides — **gitignored**, must exist locally |
+| `~/.config/hostname/<hostname>/bashrc` | Host-specific shell config — **tracked**, sourced before `.bashrc-local` |
+| `~/.bashrc-local` | Machine-local overrides — **gitignored**, sourced last; can override host-specific config |
 | `~/.emacs.d/init.el` | Primary Emacs config (evil-mode, eglot/LSP, magit, org) |
 | `~/.emacs.d/lisp/` | Custom Emacs Lisp modules (all tracked except `init-gnus.el`) |
 | `~/.config/i3/config` | i3 WM config; uses `include` for per-hostname files |
