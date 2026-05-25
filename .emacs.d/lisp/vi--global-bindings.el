@@ -31,4 +31,14 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 
+(defun toggle-theme ()
+  "Toggle between solarized-dark and solarized-light themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'solarized-dark)
+      (load-theme 'solarized-light t)
+    (load-theme 'solarized-dark t)))
+
+(global-set-key (kbd "<f12>") 'toggle-theme)
+
+
 (provide 'vi--global-bindings)
