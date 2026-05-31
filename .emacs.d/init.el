@@ -23,8 +23,13 @@
 (require 'server)
 
 (when (and window-system
-           (eq (cdr command-line-args) nil)
-           (not (server-running-p)))
+           (not (server-running-p))
+           ;; KDE restores Emacs via ~/.config/ksmserverrc with
+           ;; --smid=...,--no-splash,--chdir=... option flags; strip them.
+           ;; Secondary instances have some non-options that will still be left
+           ;; after the stripping e.g. `emacs -f gnus`, `emacs foo.c`.
+           (cl-every (lambda (a) (string-prefix-p "-" a))
+                     (cdr command-line-args)))
   (message "This is the main instance (%d). Starting emacs server." (emacs-pid))
   (server-start)
   (desktop-save-mode)
