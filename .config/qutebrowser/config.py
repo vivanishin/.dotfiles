@@ -1416,7 +1416,6 @@ c.zoom.default = '200%'
 c.content.site_specific_quirks.enabled = True
 
 ## Bindings for normal mode
-config.bind('<Space>', 'scroll-page 0 1')
 config.bind('<Ctrl-E>', 'tab-clone')
 config.bind('t', 'set-cmd-text -s :open -t')
 config.bind('<Ctrl-n>', 'tab-next')
@@ -1434,6 +1433,10 @@ config.bind('<F1>', 'config-cycle --temp tabs.show multiple switching')
 config.bind('<Ctrl-R>',
             'config-cycle content.user_stylesheets '
             '~/.config/qutebrowser/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css ""')
+
+config.bind('gg', 'scroll top')
+config.bind('G', 'scroll bottom')
+config.bind('<Space>', 'scroll-page 0 1')
 # config.bind('yy', 'yank')
 # config.bind("'", 'enter-mode jump_mark')
 # config.bind('+', 'zoom-in')
@@ -1499,7 +1502,6 @@ config.bind('<Ctrl-R>',
 # config.bind('B', 'set-cmd-text -s :quickmark-load -t')
 # config.bind('D', 'tab-close -o')
 # config.bind('F', 'hint all tab')
-# config.bind('G', 'scroll-to-perc')
 # config.bind('H', 'back')
 # config.bind('J', 'tab-next')
 # config.bind('K', 'tab-prev')
@@ -1537,7 +1539,6 @@ config.bind('<Ctrl-R>',
 # config.bind('gb', 'set-cmd-text -s :bookmark-load')
 # config.bind('gd', 'download')
 # config.bind('gf', 'view-source')
-# config.bind('gg', 'scroll-to-perc 0')
 # config.bind('gl', 'tab-move -')
 # config.bind('gm', 'tab-move')
 # config.bind('go', 'set-cmd-text :open {url:pretty}')
