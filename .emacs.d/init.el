@@ -117,7 +117,9 @@
     (setq git-commit-summary-max-length 50)
     (add-hook 'magit-revision-mode-hook 'bug-reference-mode)
     (add-hook 'git-commit-mode-hook
-              (lambda () (set-fill-column 72))))
+              (lambda () (set-fill-column 72)))
+    (with-eval-after-load 'magit-pull
+      (transient-suffix-put 'magit-pull "-A" :level 1)))
   :ensure t)
 
 (use-package projectile
