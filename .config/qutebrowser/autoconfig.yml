@@ -14,6 +14,7 @@ settings:
   content.notifications.enabled:
     https://app.todoist.com: false
     https://gitlab.ispras.ru: false
+    https://hotline.aktiv-company.ru: false
     https://www.youtube.com: false
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false
