@@ -115,6 +115,11 @@ workspace/
 .ipython/
 .lesshst
 .local/
+!.local/share/
+!.local/share/konsole/
+!.local/share/konsole/SolarizedBase.profile
+!.local/share/konsole/SolarizedLight.profile
+!.local/share/konsole/SolarizedDark.profile
 .mozilla/
 .newsrc-dribble
 .npm/
