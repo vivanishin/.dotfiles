@@ -150,6 +150,7 @@
                        :autopep8 (:enabled :json-false)
                        :rope_autoimport (:enabled t))))))
   (add-to-list 'eglot-server-programs
+               '(typst-ts-mode . ("tinymist"))
                '((c++-mode c-mode)
                  .
                  (lambda (arg)
