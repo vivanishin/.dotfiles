@@ -188,10 +188,9 @@
   :vc (:url "https://codeberg.org/meow_king/typst-ts-mode"
        :rev :newest)
   :mode ("\\.typ\\'" . typst-ts-mode)
-  :init
+  :config
   (add-to-list 'treesit-language-source-alist
                '(typst "https://github.com/uben0/tree-sitter-typst"))
-  :config
   (modify-syntax-entry ?_ "w" typst-ts-syntax-table)
   (modify-syntax-entry ?- "w" typst-ts-syntax-table)
   (unless (treesit-language-available-p 'typst)
