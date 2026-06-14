@@ -183,6 +183,19 @@
   :config
   (modify-syntax-entry ?_ "w" yaml-mode-syntax-table))
 
+(use-package typst-ts-mode
+  :vc (:url "https://codeberg.org/meow_king/typst-ts-mode"
+       :rev :newest)
+  :mode ("\\.typ\\'" . typst-ts-mode)
+  :init
+  (add-to-list 'treesit-language-source-alist
+               '(typst "https://github.com/uben0/tree-sitter-typst"))
+  :config
+  (modify-syntax-entry ?_ "w" typst-ts-syntax-table)
+  (modify-syntax-entry ?- "w" typst-ts-syntax-table)
+  (unless (treesit-language-available-p 'typst)
+    (treesit-install-language-grammar 'typst)))
+
 (use-package evil
   :ensure t
 
