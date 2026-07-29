@@ -14,10 +14,6 @@
  '(gnus-read-newsrc-file nil)
  '(gnus-save-newsrc-file nil)
  '(org-startup-truncated nil)
- '(package-archives
-   '(("melpa" . "http://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/")
-     ("org" . "http://orgmode.org/elpa/")))
  '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((typst-ts-mode :url "https://codeberg.org/meow_king/typst-ts-mode")))
