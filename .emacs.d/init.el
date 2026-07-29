@@ -8,9 +8,15 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (package-initialize)
+(let ((ac (expand-file-name "archives/melpa/archive-contents" package-user-dir)))
+  (when (or (not (file-exists-p ac))
+            (> (float-time (time-subtract (current-time)
+                                           (file-attribute-modification-time
+                                            (file-attributes ac))))
+               (* 60 60 24)))
+    (package-refresh-contents)))
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
 
 (use-package auto-package-update
