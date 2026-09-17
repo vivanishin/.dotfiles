@@ -10,3 +10,4 @@ set statusbar-bg "#002b36"
 set statusbar-fg "#93a1a1"
 set guioptions "" # No statusbar (s), no cli (c), no scrollbars (h,v).
 set font "Inconsolata normal 21"
+set open-link-confirm "false"
