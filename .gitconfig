@@ -11,6 +11,7 @@
 	excludesfile = /home/vlad/.gitignore-global
 [diff]
 	algorithm = patience
+	submodule = log
 [pull]
 	rebase = interactive
 [init]
@@ -21,3 +22,5 @@
 
 [includeIf "gitdir:/mnt/co/work/"]
     path = .gitconfig-work
+[submodule]
+	recurse = true
