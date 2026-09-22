@@ -1415,6 +1415,10 @@ c.zoom.default = '200%'
 
 c.content.site_specific_quirks.enabled = True
 
+# WebRTC should only use TCP to contact peers or servers unless the proxy server
+# supports UDP. This doesn't expose any local addresses either.
+c.content.webrtc_ip_handling_policy = "disable-non-proxied-udp"
+
 ## Bindings for normal mode
 config.bind('<Ctrl-E>', 'tab-clone')
 config.bind('t', 'set-cmd-text -s :open -t')
