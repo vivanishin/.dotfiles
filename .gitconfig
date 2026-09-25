@@ -9,6 +9,7 @@
 
 [core]
 	excludesfile = /home/vlad/.gitignore-global
+	quotepath = false
 [diff]
 	algorithm = patience
 	submodule = log
