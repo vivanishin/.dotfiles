@@ -14,10 +14,12 @@ settings:
       Firefox/102.0
   content.notifications.enabled:
     https://app.todoist.com: false
+    https://calendar.google.com: false
     https://gitlab.ispras.ru: false
     https://hotline.aktiv-company.ru: false
     https://www.youtube.com: false
   content.register_protocol_handler:
+    https://calendar.google.com?cid=%25s: false
     https://mail.google.com?extsrc=mailto&url=%25s: false
     https://mail.yandex.ru?mailto=%25s: false
   content.user_stylesheets:
