@@ -1433,7 +1433,7 @@ proxies = ['system']
 if hostname == 'vlad-optiplex':
     proxies = ['http://195.250.84.236:3128'] + proxies
 else:
-    proxies = ['socks://127.0.0.1:1080'] + proxies
+    proxies = ['socks://127.0.0.1:1080', 'http://127.0.0.1:3128'] + proxies
 config.bind('X', 'config-cycle --temp --print content.proxy ' + ' '.join(proxies))
 
 statusbar_widgets = ['keypress', 'url', 'scroll', 'history', 'tabs', 'progress']
