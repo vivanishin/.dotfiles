@@ -65,6 +65,7 @@ workspace/
 .config/plasma-org.kde.plasma.desktop-appletsrc
 .config/plasma-nm
 .config/spectaclerc
+.config/systemd
 .config/systemmonitorrc
 .config/pulse/
 .config/kate/
