@@ -319,6 +319,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 export PATH=$(path_remove_dups $PATH)
+export CODEX_HOME="$HOME/.priv/codex"
 
 # User specific aliases and functions
 # If not running interactively, don't do anything

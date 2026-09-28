@@ -25,6 +25,7 @@ workspace/
 .bash_history
 .bashrc-local
 .cache/
+.codex/
 .config/**/QtProject.conf
 .config/Unknown Organization/
 .config/GIMP/
