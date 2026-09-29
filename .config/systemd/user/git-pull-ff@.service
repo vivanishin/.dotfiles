@@ -20,6 +20,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
+Environment="GIT_SSH_COMMAND=/usr/bin/ssh -F %h/.ssh/config"
 WorkingDirectory=%f
 ExecCondition=/usr/bin/grep -Fxq -- %f %h/.priv/git-pull-ff/allowed
 ExecStart=%h/bin/git-pull-ff-current.sh
