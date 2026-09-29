@@ -1,0 +1,32 @@
+# Fast-forward an allow-listed Git repository.
+#
+# Add the absolute repository path to ~/.priv/git-pull-ff/allowed, then encode
+# the path as a systemd instance and start the resulting unit:
+#
+#   unit=$(systemd-escape --path --template=git-pull-ff@.service /path/to/repo)
+#   systemctl --user start --wait "$unit"
+#
+# Inspect the result and log with:
+#
+#   systemctl --user show "$unit" -p Result -p ExecMainStatus
+#   journalctl --user -u "$unit" -n 30 --no-pager
+#
+# %i is the escaped instance string; %f restores its absolute filesystem path.
+# Run `systemctl --user daemon-reload` after changing this file.
+
+[Unit]
+Description=Fast-forward Git repository %f
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%f
+ExecCondition=/usr/bin/grep -Fxq -- %f %h/.priv/git-pull-ff/allowed
+ExecStart=%h/bin/git-pull-ff-current.sh
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%f
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
