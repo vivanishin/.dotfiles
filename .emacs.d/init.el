@@ -197,6 +197,10 @@
   :config
   (modify-syntax-entry ?_ "w" yaml-mode-syntax-table))
 
+(use-package jq-mode
+  :mode "\\.jq\\'"
+  :ensure t)
+
 (use-package typst-ts-mode
   :vc (:url "https://codeberg.org/meow_king/typst-ts-mode"
        :rev :newest)
