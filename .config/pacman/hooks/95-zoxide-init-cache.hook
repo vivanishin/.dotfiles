@@ -1,0 +1,19 @@
+# Install this file as:
+# /etc/pacman.d/hooks/95-zoxide-init-cache.hook
+#
+# Do not add this user-writable directory to pacman's HookDir.
+
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = zoxide
+
+[Action]
+Description = Refreshing the zoxide Bash init candidate as vlad...
+When = PostTransaction
+Depends = bash
+Depends = coreutils
+Depends = diffutils
+Depends = util-linux
+Exec = /usr/bin/runuser -u vlad -- /usr/bin/env -i HOME=/home/vlad USER=vlad LOGNAME=vlad SHELL=/usr/bin/bash PATH=/usr/bin:/bin /home/vlad/.config/pacman/hooks/update-bashrc-zoxide

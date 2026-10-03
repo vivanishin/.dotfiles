@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+
+set -euo pipefail
+
+readonly source_hook=/home/vlad/.config/pacman/hooks/95-zoxide-init-cache.hook
+readonly target_hook=/etc/pacman.d/hooks/95-zoxide-init-cache.hook
+
+[ -f "$source_hook" ] || {
+    printf 'Hook template not found: %s\n' "$source_hook" >&2
+    exit 1
+}
+
+install_hook()
+{
+    /usr/bin/install -Dm0644 -o root -g root -- "$source_hook" "$target_hook"
+}
+
+if [ "$EUID" -eq 0 ]; then
+    install_hook
+else
+    /usr/bin/sudo /usr/bin/install -Dm0644 -o root -g root -- \
+        "$source_hook" "$target_hook"
+fi
+
+printf 'Installed root-owned hook at %s\n' "$target_hook"

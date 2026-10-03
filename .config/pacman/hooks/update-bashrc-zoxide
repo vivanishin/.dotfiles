@@ -1,0 +1,121 @@
+#!/usr/bin/bash
+
+set -euo pipefail
+
+readonly cache=/home/vlad/.bashrc-zoxide
+readonly candidate="${cache}.new"
+readonly script=/home/vlad/.config/pacman/hooks/update-bashrc-zoxide
+
+tmp=
+
+cleanup()
+{
+    if [ -n "$tmp" ]; then
+        /usr/bin/rm -f -- "$tmp"
+    fi
+}
+
+die()
+{
+    printf 'zoxide init cache: %s\n' "$*" >&2
+    exit 1
+}
+
+show_diff()
+{
+    local output=${1:-/dev/stdout}
+    local status=0
+
+    if [ -r "$cache" ]; then
+        /usr/bin/diff -u \
+            --label "$cache (reviewed)" "$cache" \
+            --label "$candidate (candidate)" "$candidate" >"$output" || status=$?
+    else
+        /usr/bin/diff -u \
+            --label '/dev/null (no reviewed cache)' /dev/null \
+            --label "$candidate (candidate)" "$candidate" >"$output" || status=$?
+    fi
+
+    if [ "$status" -gt 1 ]; then
+        die "diff failed with status $status"
+    fi
+}
+
+has_controlling_terminal()
+{
+    printf '' 2>/dev/null >/dev/tty
+}
+
+prompt_for_approval()
+{
+    local answer
+
+    if ! printf '\nReplace the reviewed cache with this candidate? [y/N] ' \
+        2>/dev/null >/dev/tty; then
+        return 1
+    fi
+    if ! IFS= read -r answer 2>/dev/null </dev/tty; then
+        return 1
+    fi
+
+    case "$answer" in
+        y|Y|yes|YES)
+            /usr/bin/mv -- "$candidate" "$cache"
+            printf 'Installed reviewed cache at %s\n' "$cache"
+            ;;
+        *)
+            printf 'Candidate not approved; left at %s\n' "$candidate"
+            printf 'Approve later with: %s --approve\n' "$script"
+            ;;
+    esac
+}
+
+generate()
+{
+    tmp=$(/usr/bin/mktemp "${candidate}.tmp.XXXXXX")
+    /usr/bin/zoxide init bash > "$tmp" || die 'generation failed'
+    /usr/bin/bash -n "$tmp" || die 'generated candidate has invalid syntax'
+    /usr/bin/mv -- "$tmp" "$candidate"
+    tmp=
+
+    if [ -r "$cache" ] && /usr/bin/cmp -s -- "$cache" "$candidate"; then
+        /usr/bin/rm -- "$candidate"
+        printf 'zoxide Bash init cache is unchanged.\n'
+        return
+    fi
+
+    if has_controlling_terminal; then
+        show_diff /dev/tty
+        if prompt_for_approval; then
+            return
+        fi
+    else
+        show_diff
+    fi
+    printf '\nCandidate retained at %s\n' "$candidate"
+    printf 'Approve interactively with: %s --approve\n' "$script"
+}
+
+approve()
+{
+    [ -r "$candidate" ] || die "no candidate exists at $candidate"
+    /usr/bin/bash -n "$candidate" || die 'candidate has invalid syntax'
+
+    if [ -r "$cache" ] && /usr/bin/cmp -s -- "$cache" "$candidate"; then
+        /usr/bin/rm -- "$candidate"
+        printf 'Candidate matched the reviewed cache; removed it.\n'
+        return
+    fi
+
+    has_controlling_terminal || die 'approval requires a controlling terminal'
+    show_diff /dev/tty
+    prompt_for_approval || die 'approval requires a controlling terminal'
+}
+
+trap cleanup EXIT
+
+case "${1:-}" in
+    '') generate ;;
+    --approve) approve ;;
+    *) die "usage: $script [--approve]" ;;
+esac

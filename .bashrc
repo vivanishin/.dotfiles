@@ -309,10 +309,6 @@ path_remove_dups()
 PROMPT_COMMAND="run_on_prompt_command"
 export HISTTIMEFORMAT="%F %T  "
 
-# This should go after other modifications of PROMPT_COMMAND (or these other
-# modifications should append rather than rewrite the variable).
-. /home/vlad/bin/z/z.sh
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
        . /etc/bashrc
@@ -462,4 +458,8 @@ fi
 # These are supposed to be really small; they are not git-controlled.
 if [ -f ~/.bashrc-local ]; then
     . ~/.bashrc-local
+fi
+
+if [ -r "$HOME/.bashrc-zoxide" ]; then
+    . "$HOME/.bashrc-zoxide"
 fi

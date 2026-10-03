@@ -142,4 +142,5 @@ workspace/
 .vpn/
 .wget-hsts
 .z
+/.bashrc-zoxide.new*
 .zoom
