@@ -205,7 +205,7 @@ define_git_etc_func()
             args+=(diff --staged "$user_args")
             ;;
         gg)
-            args+=(grep -n "$user_args")
+            args+=(grep --recurse-submodules -n "$user_args")
             ;;
         gl)
             args+=(log "$user_args")
