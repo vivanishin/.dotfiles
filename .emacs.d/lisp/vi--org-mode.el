@@ -52,4 +52,6 @@
 (setq org-agenda-skip-scheduled-if-done t)
 (setq org-agenda-skip-timestamp-if-done t)
 
+(require 'osl)
+
 (provide 'vi--org-mode)

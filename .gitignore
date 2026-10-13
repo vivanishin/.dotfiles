@@ -66,7 +66,11 @@ workspace/
 .config/plasma-org.kde.plasma.desktop-appletsrc
 .config/plasma-nm
 .config/spectaclerc
-.config/systemd
+.config/systemd/*
+!.config/systemd/user/
+.config/systemd/user/*
+!.config/systemd/user/git-pull-ff@.service
+!.config/systemd/user/osl.service
 .config/systemmonitorrc
 .config/pulse/
 .config/kate/
