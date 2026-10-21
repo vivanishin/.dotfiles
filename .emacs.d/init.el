@@ -197,6 +197,10 @@
   :config
   (modify-syntax-entry ?_ "w" yaml-mode-syntax-table))
 
+(use-package markdown-mode
+  :ensure t
+  :mode ("\\.md\\'" . gfm-mode))
+
 (use-package jq-mode
   :mode "\\.jq\\'"
   :ensure t)

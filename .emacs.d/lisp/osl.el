@@ -103,6 +103,12 @@
     (unless reference (user-error "No osl: reference at point"))
     (osl-open reference)))
 
+(defun osl--markdown-follow (url)
+  "Resolve canonical OSL URL locally, leaving other Markdown links alone."
+  (when (string-match-p "\\`osl:[1-9][0-9]*\\'" url)
+    (osl-open url)
+    t))
+
 (defun osl-protocol-open (info)
   "Open the canonical OSL reference supplied by org-protocol INFO."
   (osl-open (or (plist-get info :reference) ""))
@@ -134,6 +140,8 @@ Bind commands in `osl-task-mode-map' in the user's configuration."
   (browse-url (concat (string-remove-suffix "/" osl-web-url) "/#" reference)))
 
 (org-link-set-parameters "osl" :follow #'osl-follow :store #'osl-store-link)
+(with-eval-after-load 'markdown-mode
+  (add-hook 'markdown-follow-link-functions #'osl--markdown-follow))
 (add-to-list 'org-protocol-protocol-alist
              '("OSL" :protocol "osl" :function osl-protocol-open))
 (add-hook 'find-file-hook #'osl--enable-task-mode)

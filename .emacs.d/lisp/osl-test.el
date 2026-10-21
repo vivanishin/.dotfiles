@@ -1,6 +1,25 @@
 ;;; osl-test.el --- Integration checks for OSL -*- lexical-binding: t; -*-
 (require 'ert)
 (require 'osl)
+(require 'markdown-mode)
+
+(ert-deftest osl-markdown-follows-links-from-their-labels ()
+  (let ((osl-directory (make-temp-file "osl-markdown-" t)) task-buffer)
+    (unwind-protect
+        (progn
+          (osl-test--init)
+          (osl--run "capture" "--title" "Target")
+          (with-temp-buffer
+            (gfm-mode)
+            (insert "[Arbitrary label](osl:1)")
+            (goto-char 5)
+            (markdown-follow-thing-at-point nil))
+          (setq task-buffer (find-buffer-visiting (osl-resolve "1")))
+          (should task-buffer)
+          (should-not (osl--markdown-follow "https://example.org/"))
+          (should-not (osl--markdown-follow "osl:01")))
+      (when (buffer-live-p task-buffer) (kill-buffer task-buffer))
+      (delete-directory osl-directory t))))
 
 (ert-deftest osl-browser-protocol-resolves-only-canonical-references ()
   (let (opened)
