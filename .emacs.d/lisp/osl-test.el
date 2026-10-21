@@ -2,6 +2,14 @@
 (require 'ert)
 (require 'osl)
 
+(ert-deftest osl-browser-protocol-resolves-only-canonical-references ()
+  (let (opened)
+    (cl-letf (((symbol-function 'osl-open) (lambda (reference) (setq opened reference))))
+      (should-not (org-protocol-check-filename-for-protocol "org-protocol://osl?reference=osl%3A280" nil nil))
+      (should (equal opened "osl:280")))
+    (should-error (osl-protocol-open '(:reference "file:///etc/passwd")) :type 'user-error)
+    (should-error (osl-protocol-open nil) :type 'user-error)))
+
 (defun osl-test--init ()
   "Initialize a temporary store with a test board configuration."
   (with-temp-file (expand-file-name ".board.json" osl-directory)

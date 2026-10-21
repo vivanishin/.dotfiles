@@ -1,6 +1,7 @@
 ;;; osl.el --- Emacs capture and permanent OSL links -*- lexical-binding: t; -*-
 
 (require 'org)
+(require 'org-protocol)
 (require 'json)
 (require 'subr-x)
 
@@ -102,6 +103,11 @@
     (unless reference (user-error "No osl: reference at point"))
     (osl-open reference)))
 
+(defun osl-protocol-open (info)
+  "Open the canonical OSL reference supplied by org-protocol INFO."
+  (osl-open (or (plist-get info :reference) ""))
+  nil)
+
 (define-minor-mode osl-task-mode
   "Permanent OSL link commands in task buffers.
 Bind commands in `osl-task-mode-map' in the user's configuration."
@@ -128,6 +134,8 @@ Bind commands in `osl-task-mode-map' in the user's configuration."
   (browse-url (concat (string-remove-suffix "/" osl-web-url) "/#" reference)))
 
 (org-link-set-parameters "osl" :follow #'osl-follow :store #'osl-store-link)
+(add-to-list 'org-protocol-protocol-alist
+             '("OSL" :protocol "osl" :function osl-protocol-open))
 (add-hook 'find-file-hook #'osl--enable-task-mode)
 (dolist (buffer (buffer-list))
   (with-current-buffer buffer (osl--enable-task-mode)))
