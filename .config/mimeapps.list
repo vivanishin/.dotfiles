@@ -12,6 +12,8 @@ application/x-extension-shtml=org.qutebrowser.qutebrowser.desktop;
 application/xhtml+xml=org.qutebrowser.qutebrowser.desktop;
 application/x-extension-xhtml=org.qutebrowser.qutebrowser.desktop;
 application/x-extension-xht=org.qutebrowser.qutebrowser.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-I3P5E1.desktop;org.telegram.desktop.desktop;
+x-scheme-handler/tonsite=org.telegram.desktop.desktop;
 
 [Default Applications]
 application/pdf=org.pwmt.zathura.desktop;
@@ -27,3 +29,5 @@ application/xhtml+xml=org.qutebrowser.qutebrowser.desktop
 application/x-extension-xhtml=org.qutebrowser.qutebrowser.desktop
 application/x-extension-xht=org.qutebrowser.qutebrowser.desktop
 x-scheme-handler/org-protocol=org-protocol.desktop
+x-scheme-handler/tg=org.telegram.desktop.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
