@@ -74,6 +74,12 @@
               (org-open-at-point))
             (setq task-buffer (find-buffer-visiting moved))
             (should task-buffer)
+            (dolist (reference '("1" "osl:1"))
+              (with-temp-buffer
+                (osl-open reference)
+                (should (eq (current-buffer) task-buffer))))
+            (dolist (reference '("" "0" "01" "osl:01" "-1" "1x" " 1" "osl:1/2"))
+              (should-error (osl-open reference) :type 'user-error))
             (should-error (osl-resolve "01") :type 'user-error)
             (with-current-buffer task-buffer
               (goto-char (point-max))

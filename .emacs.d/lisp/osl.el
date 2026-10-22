@@ -35,10 +35,10 @@
   (find-file (osl-resolve number)))
 
 (defun osl-open (reference)
-  "Open an exact canonical REFERENCE such as osl:1234."
-  (interactive "sOSL reference (osl:1234): ")
-  (unless (string-match "\\`osl:\\([1-9][0-9]*\\)\\'" reference)
-    (user-error "Expected an exact osl:<number> reference"))
+  "Open canonical REFERENCE, either 1234 or osl:1234."
+  (interactive "sOSL number or reference (1234 or osl:1234): ")
+  (unless (string-match "\\`\\(?:osl:\\)?\\([1-9][0-9]*\\)\\'" reference)
+    (user-error "Expected a positive OSL number or osl:<number> reference"))
   (osl-follow (match-string 1 reference) nil))
 
 (defun osl--config ()
