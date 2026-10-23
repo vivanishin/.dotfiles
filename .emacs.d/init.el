@@ -198,8 +198,16 @@
   (modify-syntax-entry ?_ "w" yaml-mode-syntax-table))
 
 (use-package markdown-mode
+  :preface
+  (defun my/insert-current-date ()
+    "Insert the current date as YYYY-MM-DD followed by the English weekday."
+    (interactive)
+    (let ((system-time-locale "C"))
+      (insert (format-time-string "%Y-%m-%d %a"))))
   :ensure t
-  :mode ("\\.md\\'" . gfm-mode))
+  :mode ("\\.md\\'" . gfm-mode)
+  :bind (:map markdown-mode-map
+              ("C-c ." . my/insert-current-date)))
 
 (use-package jq-mode
   :mode "\\.jq\\'"
