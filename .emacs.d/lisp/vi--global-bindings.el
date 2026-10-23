@@ -1,6 +1,7 @@
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 (global-set-key (kbd "C-;") 'comment-line)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
+(global-set-key (kbd "<f4>") #'osl-capture)
 (global-set-key (kbd "<f6>") 'flyspell-buffer)
 (global-set-key (kbd "<f7>")
   (lambda ()

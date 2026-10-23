@@ -356,6 +356,7 @@ the name of FILE in the current directory, suitable for creation"
 
 ;;; ------------------------------------------------------------
 ;;; The rest of my key mappings. Makes sense to put it after all package loads.
+(require 'osl)
 (require 'vi--global-bindings)
 (require 'vi--org-mode)
 
