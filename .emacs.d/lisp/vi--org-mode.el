@@ -53,5 +53,6 @@
 (setq org-agenda-skip-timestamp-if-done t)
 
 (require 'osl)
+(global-set-key (kbd "<f4>") #'osl-capture)
 
 (provide 'vi--org-mode)
