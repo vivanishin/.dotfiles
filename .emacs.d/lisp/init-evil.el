@@ -59,6 +59,7 @@
     "k" 'bookmark-jump
     "a" 'bookmark-set
     "p" 'projectile-find-file
+    "P" 'projectile-find-file-in-directory
     "rs" 'rm-eol-whitespace
     "re" '(lambda () (interactive) (load-file "~/.emacs.d/init.el"))
     "gs" 'magit-status
