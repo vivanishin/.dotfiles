@@ -34,7 +34,8 @@
   (with-temp-file (expand-file-name ".board.json" osl-directory)
     (insert "{\"columns\":[\"00-inbox\",\"10-next\",\"90-archive\"],"
             "\"spaces\":[\"home\",\"work\"],\"captureColumn\":\"00-inbox\","
-            "\"defaultSpace\":\"home\",\"archiveColumn\":\"90-archive\"}"))
+            "\"defaultSpace\":\"home\",\"archiveColumn\":\"90-archive\","
+            "\"webDefaults\":{\"timeZone\":\"Europe/Moscow\",\"rules\":[{\"space\":\"home\"}]}}"))
   (osl--run "init"))
 
 (ert-deftest osl-emacs-capture-resolve-and-follow ()
@@ -92,13 +93,28 @@
         (kill-buffer task-buffer))
       (delete-directory osl-directory t))))
 
+(ert-deftest osl-emacs-capture-opens-generated-slug ()
+  (let ((osl-directory (make-temp-file "osl-emacs-slug-" t)) task-buffer)
+    (unwind-protect
+        (progn
+          (osl-test--init)
+          (osl-capture "Fix login bug" "home")
+          (setq task-buffer (current-buffer))
+          (should (equal buffer-file-name
+                         (expand-file-name "00-inbox/1-fix-login-bug.md" osl-directory)))
+          (should osl-task-mode)
+          (should (equal (osl-resolve "1") buffer-file-name))
+          (should (equal (osl--buffer-task) '("1" "Fix login bug"))))
+      (when (buffer-live-p task-buffer) (kill-buffer task-buffer))
+      (delete-directory osl-directory t))))
+
 (ert-deftest osl-emacs-reports-ambiguous-link ()
   (let ((osl-directory (make-temp-file "osl-emacs-duplicate-" t)))
     (unwind-protect
         (progn
           (osl-test--init)
           (osl--run "capture" "--title" "Duplicate test")
-          (copy-file (expand-file-name "00-inbox/1.md" osl-directory)
+          (copy-file (osl-resolve "1")
                      (expand-file-name "90-archive/copy.md" osl-directory))
           (should-error (osl-resolve "1") :type 'user-error))
       (delete-directory osl-directory t))))
