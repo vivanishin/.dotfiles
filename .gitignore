@@ -49,6 +49,7 @@ workspace/
 .config/inkscape/
 .config/KDE/UserFeedback.conf
 .config/kconf_updaterc
+.config/kded6rc
 .config/kolourpaintrc
 .config/konsolesshconfig
 .config/kritadisplayrc
