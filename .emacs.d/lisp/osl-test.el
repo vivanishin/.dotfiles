@@ -108,6 +108,70 @@
       (when (buffer-live-p task-buffer) (kill-buffer task-buffer))
       (delete-directory osl-directory t))))
 
+(ert-deftest osl-emacs-capture-selects-a-configured-column ()
+  (let ((osl-directory (make-temp-file "osl-emacs-column-" t)) task-buffer prompts)
+    (unwind-protect
+        (progn
+          (osl-test--init)
+          (cl-letf (((symbol-function 'read-string) (lambda (&rest _) "Selected column"))
+                    ((symbol-function 'completing-read)
+                     (lambda (prompt collection _predicate require-match _initial _history default)
+                       (push prompt prompts)
+                       (should require-match)
+                       (if (equal prompt "Space: ")
+                           (progn (should (equal default "home")) "work")
+                         (should (equal collection '("00-inbox" "10-next" "90-archive")))
+                         (should (equal default "00-inbox"))
+                         "10-next"))))
+            (call-interactively #'osl-capture))
+          (setq task-buffer (current-buffer))
+          (should (equal (nreverse prompts) '("Space: " "Column: ")))
+          (should (equal buffer-file-name
+                         (expand-file-name "10-next/1-selected-column.md" osl-directory)))
+          (should (string-match-p "\\[tag:space::work\\]" (buffer-string)))
+          (should (equal (osl-resolve "1") buffer-file-name)))
+      (when (buffer-live-p task-buffer) (kill-buffer task-buffer))
+      (delete-directory osl-directory t))))
+
+(ert-deftest osl-emacs-capture-defaults-follow-board-configuration ()
+  (let ((osl-directory (make-temp-file "osl-emacs-column-default-" t)) task-buffer)
+    (unwind-protect
+        (progn
+          (osl-test--init)
+          (let ((config (osl--config)))
+            (setf (alist-get 'captureColumn config) "10-next")
+            (with-temp-file (expand-file-name ".board.json" osl-directory)
+              (insert (json-encode config))))
+          (cl-letf (((symbol-function 'read-string) (lambda (&rest _) "Default column"))
+                    ((symbol-function 'completing-read)
+                     (lambda (_prompt _collection _predicate _match _initial _history default)
+                       default)))
+            (call-interactively #'osl-capture))
+          (setq task-buffer (current-buffer))
+          (should (equal buffer-file-name
+                         (expand-file-name "10-next/1-default-column.md" osl-directory)))
+          (should (string-match-p "\\[tag:space::home\\]" (buffer-string))))
+      (when (buffer-live-p task-buffer) (kill-buffer task-buffer))
+      (delete-directory osl-directory t))))
+
+(ert-deftest osl-emacs-capture-cancelled-column-does-not-allocate ()
+  (let ((osl-directory (make-temp-file "osl-emacs-column-cancel-" t)))
+    (unwind-protect
+        (progn
+          (osl-test--init)
+          (cl-letf (((symbol-function 'read-string) (lambda (&rest _) "Cancelled capture"))
+                    ((symbol-function 'completing-read)
+                     (lambda (prompt &rest _)
+                       (if (equal prompt "Space: ") "home" (signal 'quit nil)))))
+            (should (eq (condition-case nil
+                            (call-interactively #'osl-capture)
+                          (quit 'cancelled))
+                        'cancelled)))
+          (with-temp-buffer
+            (insert-file-contents (expand-file-name ".next-id" osl-directory))
+            (should (equal (buffer-string) "1\n"))))
+      (delete-directory osl-directory t))))
+
 (ert-deftest osl-emacs-reports-ambiguous-link ()
   (let ((osl-directory (make-temp-file "osl-emacs-duplicate-" t)))
     (unwind-protect

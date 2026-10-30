@@ -45,15 +45,20 @@
   "Read the shared board configuration through the OSL helper."
   (json-parse-string (osl--run "config") :object-type 'alist :array-type 'list))
 
-(defun osl-capture (title space)
-  "Capture TITLE in SPACE using the shared numeric allocator."
+(defun osl-capture (title space &optional state)
+  "Capture TITLE in SPACE and optional STATE using the shared allocator.
+STATE defaults to the configured capture column."
   (interactive
    (let ((config (osl--config)))
      (list (read-string "Task title: ")
            (completing-read "Space: " (alist-get 'spaces config) nil t nil nil
-                            (alist-get 'defaultSpace config)))))
+                            (alist-get 'defaultSpace config))
+           (completing-read "Column: " (alist-get 'columns config) nil t nil nil
+                            (alist-get 'captureColumn config)))))
   (let* ((result (json-parse-string
-                  (osl--run "capture" "--title" title "--space" space)
+                  (apply #'osl--run
+                         (append (list "capture" "--title" title "--space" space)
+                                 (when state (list "--state" state))))
                   :object-type 'alist))
          (filename (alist-get 'path result))
          (reference (alist-get 'reference result)))
