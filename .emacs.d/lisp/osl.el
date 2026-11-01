@@ -34,12 +34,17 @@
   "Open the task with NUMBER, independent of its title or directory."
   (find-file (osl-resolve number)))
 
+(defun osl--reference-number (reference)
+  "Return the canonical task number from REFERENCE."
+  (unless (and (stringp reference)
+               (string-match "\\`\\(?:osl:\\)?\\([1-9][0-9]*\\)\\'" reference))
+    (user-error "Expected a positive OSL number or osl:<number> reference"))
+  (match-string 1 reference))
+
 (defun osl-open (reference)
   "Open canonical REFERENCE, either 1234 or osl:1234."
   (interactive "sOSL number or reference (1234 or osl:1234): ")
-  (unless (string-match "\\`\\(?:osl:\\)?\\([1-9][0-9]*\\)\\'" reference)
-    (user-error "Expected a positive OSL number or osl:<number> reference"))
-  (osl-follow (match-string 1 reference) nil))
+  (osl-follow (osl--reference-number reference) nil))
 
 (defun osl--config ()
   "Read the shared board configuration through the OSL helper."
@@ -115,9 +120,8 @@ STATE defaults to the configured capture column."
     t))
 
 (defun osl-protocol-open (info)
-  "Open the canonical OSL reference supplied by org-protocol INFO."
-  (osl-open (or (plist-get info :reference) ""))
-  nil)
+  "Return the task file from org-protocol INFO for normal server display."
+  (osl-resolve (osl--reference-number (plist-get info :reference))))
 
 (define-minor-mode osl-task-mode
   "Permanent OSL link commands in task buffers.

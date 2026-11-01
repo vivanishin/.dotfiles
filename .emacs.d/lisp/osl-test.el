@@ -1,5 +1,6 @@
 ;;; osl-test.el --- Integration checks for OSL -*- lexical-binding: t; -*-
 (require 'ert)
+(require 'server)
 (require 'osl)
 (require 'markdown-mode)
 
@@ -22,12 +23,36 @@
       (delete-directory osl-directory t))))
 
 (ert-deftest osl-browser-protocol-resolves-only-canonical-references ()
-  (let (opened)
-    (cl-letf (((symbol-function 'osl-open) (lambda (reference) (setq opened reference))))
-      (should-not (org-protocol-check-filename-for-protocol "org-protocol://osl?reference=osl%3A280" nil nil))
-      (should (equal opened "osl:280")))
+  (let (resolved)
+    (cl-letf (((symbol-function 'osl-resolve)
+               (lambda (number) (setq resolved number) "/tmp/osl-protocol-target.md"))
+              ((symbol-function 'osl-open)
+               (lambda (&rest _) (ert-fail "The server must open the resolved file"))))
+      (dolist (url '("org-protocol://osl?reference=osl%3A280"
+                     "org-protocol://osl?reference=280"))
+        (should (equal (org-protocol-check-filename-for-protocol url nil nil)
+                       "/tmp/osl-protocol-target.md"))
+        (should (equal resolved "280"))))
     (should-error (osl-protocol-open '(:reference "file:///etc/passwd")) :type 'user-error)
-    (should-error (osl-protocol-open nil) :type 'user-error)))
+    (should-error (osl-protocol-open nil) :type 'user-error)
+    (should-error (osl-protocol-open '(:reference "osl:0280")) :type 'user-error)))
+
+(ert-deftest osl-browser-protocol-uses-normal-server-file-visiting ()
+  (let ((osl-directory (make-temp-file "osl-server-protocol-" t)) task-buffer)
+    (unwind-protect
+        (progn
+          (osl-test--init)
+          (osl--run "capture" "--title" "Protocol task")
+          (let* ((url "org-protocol://osl?reference=osl%3A1")
+                 (buffers (server-visit-files (list (cons url nil)) nil t)))
+            (should (= (length buffers) 1))
+            (setq task-buffer (car buffers))
+            (should (equal (buffer-file-name task-buffer) (osl-resolve "1")))
+            (with-current-buffer task-buffer
+              (should osl-task-mode)
+              (should-not server-buffer-clients))))
+      (when (buffer-live-p task-buffer) (kill-buffer task-buffer))
+      (delete-directory osl-directory t))))
 
 (defun osl-test--init ()
   "Initialize a temporary store with a test board configuration."

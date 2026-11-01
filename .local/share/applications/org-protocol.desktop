@@ -2,7 +2,7 @@
 Name=Emacs Org Protocol
 Comment=Open OSL references in Emacs
 Type=Application
-Exec=/usr/bin/emacsclient --alternate-editor= -- %u
+Exec=/usr/bin/emacsclient --no-wait --alternate-editor= -- %u
 Icon=emacs
 Terminal=false
 MimeType=x-scheme-handler/org-protocol;
