@@ -251,8 +251,10 @@ Bind commands in `osl-task-mode-map' in the user's configuration."
       (progn
         (osl--remember-task)
         (add-hook 'write-contents-functions #'osl--before-write nil t)
+        (add-hook 'after-set-visited-file-name-hook #'osl--remember-task nil t)
         (add-hook 'after-save-hook #'osl--remember-task nil t))
     (remove-hook 'write-contents-functions #'osl--before-write t)
+    (remove-hook 'after-set-visited-file-name-hook #'osl--remember-task t)
     (remove-hook 'after-save-hook #'osl--remember-task t)))
 
 (defun osl--enable-task-mode ()

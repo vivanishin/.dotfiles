@@ -1,6 +1,18 @@
+(defun vi-rename-visited-file ()
+  "Rename the current file, prefilling its full name for editing."
+  (interactive)
+  (if buffer-file-name
+      (rename-visited-file
+       (read-file-name "Rename visited file to: "
+                       (file-name-directory buffer-file-name)
+                       buffer-file-name nil
+                       (file-name-nondirectory buffer-file-name)))
+    (call-interactively #'rename-visited-file)))
+
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 (global-set-key (kbd "C-;") 'comment-line)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
+(global-set-key (kbd "<f2>") #'vi-rename-visited-file)
 (global-set-key (kbd "<f4>") #'osl-capture)
 (global-set-key (kbd "<f6>") 'flyspell-buffer)
 (global-set-key (kbd "<f7>")
