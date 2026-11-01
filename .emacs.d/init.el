@@ -140,6 +140,18 @@
   :config
   (setq projectile-enable-caching t
         projectile-use-git-grep t)
+  (defvar vi-projectile-watch-directories
+    '("/mnt/co/notes/" "/mnt/co/work/")
+    "Directories whose local projects get filesystem cache updates.")
+  (defun vi-projectile-watch-project-p (project _files)
+    "Return non-nil when PROJECT is inside a watched directory."
+    (and (not (file-remote-p project))
+         (seq-some (lambda (directory)
+                     (file-in-directory-p project directory))
+                   vi-projectile-watch-directories)))
+  (advice-add 'projectile--maybe-watch-project :before-while
+              #'vi-projectile-watch-project-p)
+  (setopt projectile-auto-update-cache-with-watches t)
   (add-to-list 'projectile-globally-ignored-directories ".vscode")
   (add-hook 'prog-mode-hook 'projectile-mode))
 

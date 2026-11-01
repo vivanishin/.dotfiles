@@ -207,3 +207,193 @@
                      (expand-file-name "90-archive/copy.md" osl-directory))
           (should-error (osl-resolve "1") :type 'user-error))
       (delete-directory osl-directory t))))
+
+(defmacro osl-test--with-movable-task (&rest body)
+  "Run BODY with an open task and SOURCE/TARGET paths in a temporary store."
+  (declare (indent 0) (debug t))
+  `(let* ((workspace (make-temp-file "osl-move-client-" t))
+          (osl-directory (expand-file-name "tasks/" workspace))
+          (create-lockfiles nil)
+          (make-backup-files nil)
+          (auto-save-default nil)
+          task-buffer source target)
+     (unwind-protect
+         (progn
+           (make-directory osl-directory)
+           (osl-test--init)
+           (osl--run "capture" "--title" "Move test")
+           (setq source (osl-resolve "1")
+                 target (expand-file-name
+                         (concat "10-next/" (file-name-nondirectory source))
+                         osl-directory)
+                 task-buffer (find-file-noselect source))
+           (with-current-buffer task-buffer ,@body))
+       (dolist (buffer (buffer-list))
+         (with-current-buffer buffer
+           (when (and buffer-file-name
+                      (file-in-directory-p buffer-file-name workspace))
+             (set-buffer-modified-p nil)
+             (kill-buffer))))
+       (delete-directory workspace t))))
+
+(ert-deftest osl-move-preserves-buffer-state-and-follows-again ()
+  (osl-test--with-movable-task
+    (goto-char (point-max))
+    (set-mark (- (point-max) 2))
+    (narrow-to-region (- (point-max) 3) (point-max))
+    (let ((position (point)) (minimum (point-min)) (maximum (point-max))
+          (mark-position (mark)) (undo buffer-undo-list))
+      (rename-file source target)
+      (should (osl-reconcile-buffer))
+      (should (equal buffer-file-name target))
+      (should (= (point) position))
+      (should (= (point-min) minimum))
+      (should (= (point-max) maximum))
+      (should (= (mark) mark-position))
+      (should (equal undo buffer-undo-list))
+      (should-not (buffer-modified-p))
+      (should (verify-visited-file-modtime (current-buffer)))
+      (should-not (file-exists-p source))
+      (let ((archived (expand-file-name "90-archive/renamed.md" osl-directory)))
+        (rename-file target archived)
+        (should (osl-reconcile-buffer))
+        (should (equal buffer-file-name archived))))))
+
+(ert-deftest osl-cli-move-open-and-browser-reuse-the-existing-buffer ()
+  (osl-test--with-movable-task
+    (let ((default-directory workspace))
+      (dolist (args '(("init" "-q")
+                      ("config" "core.hooksPath" "/dev/null")
+                      ("config" "user.name" "OSL test")
+                      ("config" "user.email" "osl@example.invalid")
+                      ("add" ".") ("commit" "-qm" "Initial")))
+        (should (zerop (apply #'call-process "git" nil nil nil args)))))
+    (osl--run "move" "1" "--to" "10-next")
+    (osl-open "1")
+    (should (eq (current-buffer) task-buffer))
+    (should (equal buffer-file-name target))
+    (rename-file target source)
+    (let ((buffers (server-visit-files
+                    '(("org-protocol://osl?reference=osl%3A1")) nil t)))
+      (should (equal buffers (list task-buffer))))
+    (should (equal buffer-file-name source))))
+
+(ert-deftest osl-buffer-selection-follows-an-external-move ()
+  (osl-test--with-movable-task
+    (save-window-excursion
+      (switch-to-buffer task-buffer)
+      (switch-to-buffer (get-buffer-create "*scratch*"))
+      (rename-file source target)
+      (switch-to-buffer task-buffer)
+      (should (equal buffer-file-name target)))))
+
+(ert-deftest osl-save-follows-a-clean-external-move ()
+  (osl-test--with-movable-task
+    (rename-file source target)
+    (save-buffer)
+    (should (equal buffer-file-name target))
+    (should-not (file-exists-p source))
+    (should-not (buffer-modified-p))
+    (should (equal (osl-resolve "1") target))))
+
+(ert-deftest osl-dirty-move-blocks-real-save-open-and-browser ()
+  (osl-test--with-movable-task
+    (goto-char (point-max))
+    (insert "\nUnsaved edit\n")
+    (let ((text (buffer-string)) (undo buffer-undo-list))
+      (rename-file source target)
+      (should-error (save-buffer) :type 'user-error)
+      (should-error (osl-open "1") :type 'user-error)
+      (should-error (osl-protocol-open '(:reference "1")) :type 'user-error)
+      (should (equal (buffer-string) text))
+      (should (equal buffer-undo-list undo))
+      (should (buffer-modified-p))
+      (should (equal buffer-file-name source))
+      (should-not (file-exists-p source))
+      (should-not (with-temp-buffer
+                    (insert-file-contents target)
+                    (search-forward "Unsaved edit" nil t))))))
+
+(ert-deftest osl-move-with-disk-edits-blocks-real-save ()
+  (osl-test--with-movable-task
+    (rename-file source target)
+    (with-temp-buffer
+      (insert-file-contents target)
+      (goto-char (point-max))
+      (insert "\nExternal edit\n")
+      (write-region (point-min) (point-max) target nil 'silent))
+    (should-error (save-buffer) :type 'user-error)
+    (should (equal buffer-file-name source))
+    (should-not (file-exists-p source))
+    (should-not (buffer-modified-p))
+    (should (with-temp-buffer
+              (insert-file-contents target)
+              (goto-char (point-min))
+              (search-forward "External edit" nil t)))))
+
+(ert-deftest osl-move-refuses-a-second-destination-buffer ()
+  (osl-test--with-movable-task
+    (rename-file source target)
+    (let* ((find-file-existing-other-name nil)
+           (destination (find-file-noselect target)))
+      (should-not (eq destination task-buffer))
+      (should-error (osl-reconcile-buffer) :type 'user-error)
+      (should-error (save-buffer) :type 'user-error)
+      (should-error (osl-open "1") :type 'user-error)
+      (should (buffer-live-p destination))
+      (should (equal buffer-file-name source))
+      (should-not (file-exists-p source)))))
+
+(ert-deftest osl-deleted-task-cannot-be-recreated-by-saving ()
+  (osl-test--with-movable-task
+    (delete-file source)
+    (should-error (save-buffer) :type 'user-error)
+    (should-not (file-exists-p source))
+    (should (equal osl--task-number "1"))))
+
+(ert-deftest osl-ambiguous-move-is-blocked-and-can-be-retried ()
+  (osl-test--with-movable-task
+    (rename-file source target)
+    (let ((duplicate (expand-file-name "90-archive/copy.md" osl-directory)))
+      (copy-file target duplicate)
+      (should-error (save-buffer) :type 'user-error)
+      (should-not (file-exists-p source))
+      (delete-file duplicate)
+      (should (osl-reconcile-buffer))
+      (should (equal buffer-file-name target)))))
+
+(ert-deftest osl-move-never-uses-an-edited-buffer-id ()
+  (osl-test--with-movable-task
+    (goto-char (point-min))
+    (search-forward "[id:1]")
+    (replace-match "[id:2]" t t)
+    (rename-file source target)
+    (should (equal osl--task-number "1"))
+    (should-error (save-buffer) :type 'user-error)
+    (should-not (file-exists-p source))
+    (should (buffer-modified-p))
+    (should (equal (osl-resolve "1") target))))
+
+(ert-deftest osl-manually-created-card-still-saves ()
+  (osl-test--with-movable-task
+    (let ((new (expand-file-name "00-inbox/2.md" osl-directory)))
+      (with-current-buffer (find-file-noselect new)
+        (insert "[id:2]\n\n# New card\n")
+        (save-buffer)
+        (should (file-exists-p new))
+        (should (equal osl--task-number "2"))))))
+
+(ert-deftest osl-move-uses-the-original-store-in-another-store-context ()
+  (osl-test--with-movable-task
+    (rename-file source target)
+    (let ((osl-directory (make-temp-file "osl-another-store-" t)))
+      (unwind-protect
+          (progn
+            (osl-test--init)
+            (osl--run "capture" "--title" "Other store")
+            (let ((other (osl-resolve "1")))
+              (should (equal (osl--resolve-for-visit "1") other))
+              (should (equal buffer-file-name source))
+              (should (osl-reconcile-buffer))
+              (should (equal buffer-file-name target))))
+        (delete-directory osl-directory t)))))

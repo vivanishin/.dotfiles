@@ -14,6 +14,14 @@
 (defcustom osl-web-url "http://127.0.0.1:8088/"
   "Read-only Web board URL." :type 'string)
 
+(defvar-local osl--task-number nil)
+(defvar-local osl--task-directory nil)
+(defvar-local osl--task-file-name nil)
+(defvar-local osl--move-warning nil)
+(defvar osl--reconciling nil)
+(defvar osl--selected-buffer nil)
+(defvar osl-task-mode)
+
 (defun osl--run (&rest args)
   "Run the OSL helper with ARGS, returning its output."
   (let ((process-environment (copy-sequence process-environment)))
@@ -32,7 +40,7 @@
 
 (defun osl-follow (number _argument)
   "Open the task with NUMBER, independent of its title or directory."
-  (find-file (osl-resolve number)))
+  (find-file (osl--resolve-for-visit number)))
 
 (defun osl--reference-number (reference)
   "Return the canonical task number from REFERENCE."
@@ -77,18 +85,129 @@ STATE defaults to the configured capture column."
              (file-in-directory-p buffer-file-name osl-directory)
              (string-match-p "\\.md\\'" buffer-file-name))
     (save-excursion
-      (goto-char (point-min))
-      (let ((limit (and (re-search-forward "^# " nil t) (line-beginning-position))))
+      (save-restriction
+        (widen)
         (goto-char (point-min))
-        (when (and limit (re-search-forward "\\[id:\\([1-9][0-9]*\\)\\]" limit t))
-          (let ((id (match-string-no-properties 1)))
-            (goto-char limit)
-            (when (looking-at "# \\(.+\\)$")
-              (list id (match-string-no-properties 1)))))))))
+        (let ((limit (and (re-search-forward "^# " nil t) (line-beginning-position))))
+          (goto-char (point-min))
+          (when (and limit (re-search-forward "\\[id:\\([1-9][0-9]*\\)\\]" limit t))
+            (let ((id (match-string-no-properties 1)))
+              (goto-char limit)
+              (when (looking-at "# \\(.+\\)$")
+                (list id (match-string-no-properties 1))))))))))
+
+(defun osl--remember-task ()
+  "Remember a task's identity without replacing an already remembered ID."
+  (when-let* ((task (osl--buffer-task)))
+    (unless osl--task-number
+      (setq osl--task-number (car task)
+            osl--task-directory
+            (file-name-as-directory (file-truename osl-directory))))
+    (setq osl--task-file-name buffer-file-name)))
+
+(defun osl--file-version (filename)
+  "Return FILENAME's identity, size and modification time."
+  (let ((attributes (file-attributes filename)))
+    (list (file-attribute-file-identifier attributes)
+          (file-attribute-size attributes)
+          (file-attribute-modification-time attributes))))
+
+(defun osl--reconcile-buffer (&optional filename)
+  "Follow a verified external move to FILENAME, or resolve the remembered ID.
+Signal a user error on conflicts; leave buffer text and unsaved edits intact."
+  (when (and osl--task-number buffer-file-name
+             (equal buffer-file-name osl--task-file-name)
+             (not (file-exists-p buffer-file-name)))
+    (let ((osl--reconciling t)
+          (osl-directory osl--task-directory))
+      (unless (equal osl--task-number (car (osl--buffer-task)))
+        (user-error "OSL: task ID changed in this buffer; cannot follow the move"))
+      (let ((target (or filename (osl-resolve osl--task-number))))
+        (unless (and (file-regular-p target)
+                     (file-in-directory-p target osl-directory))
+          (user-error "OSL: moved task is missing or outside its task store"))
+        (when (buffer-modified-p)
+          (user-error "OSL osl:%s moved to %s; resolve unsaved edits before retrying"
+                      osl--task-number target))
+        (when-let* ((other (find-buffer-visiting target)))
+          (unless (eq other (current-buffer))
+            (user-error "OSL: %s already visits the destination; resolve both buffers"
+                        (buffer-name other))))
+        (let ((text (save-restriction
+                      (widen)
+                      (buffer-substring-no-properties (point-min) (point-max))))
+              (version (osl--file-version target))
+              (coding-system-for-read buffer-file-coding-system))
+          (unless (with-temp-buffer
+                    (insert-file-contents target)
+                    (equal text (buffer-string)))
+            (user-error "OSL osl:%s moved and changed on disk; compare with %s"
+                        osl--task-number target))
+          (unless (and (equal version (osl--file-version target))
+                       (not (file-exists-p buffer-file-name)))
+            (user-error "OSL: task files changed during reconciliation; retry"))
+          (set-visited-file-name target nil t)
+          (set-visited-file-modtime (nth 2 version))
+          (setq osl--task-file-name buffer-file-name
+                osl--move-warning nil)
+          (message "OSL osl:%s now visits %s" osl--task-number target)
+          t)))))
+
+(defun osl-reconcile-buffer ()
+  "Follow the current task's external move, reporting any conflict."
+  (interactive)
+  (unless osl-task-mode (user-error "This buffer is not an OSL task"))
+  (osl--reconcile-buffer))
+
+(defun osl--before-write ()
+  "Reconcile before writing, allowing conflicts to abort the save."
+  ;; Emacs demotes errors from before-save-hook and would save the old path.
+  (osl--reconcile-buffer)
+  nil)
+
+(defun osl--resolve-for-visit (number)
+  "Resolve NUMBER and reconcile its existing buffer before visiting it."
+  (let ((filename (osl-resolve number))
+        (directory (file-name-as-directory (file-truename osl-directory)))
+        buffers)
+    (dolist (buffer (buffer-list))
+      (with-current-buffer buffer
+        (when (and osl-task-mode (equal osl--task-number number)
+                   (equal osl--task-directory directory))
+          (push buffer buffers))))
+    (when (cdr buffers)
+      (user-error "OSL osl:%s has several open buffers; resolve them before opening"
+                  number))
+    (when buffers
+      (with-current-buffer (car buffers)
+        (osl--reconcile-buffer filename)))
+    filename))
+
+(defun osl--check-selected-buffer ()
+  "Reconcile a newly selected task buffer without interrupting selection."
+  (unless osl--reconciling
+    (let ((buffer (window-buffer (selected-window))))
+      (unless (eq buffer osl--selected-buffer)
+        (setq osl--selected-buffer buffer)
+        (with-current-buffer buffer
+          (when osl-task-mode
+            (condition-case err
+                (osl--reconcile-buffer)
+              (error
+               (let ((warning (error-message-string err)))
+                 (unless (equal warning osl--move-warning)
+                   (setq osl--move-warning warning)
+                   (message "%s" warning)))))))))))
+
+(defun osl--focus-change ()
+  "Check the selected task after Emacs regains focus."
+  (when (frame-focus-state)
+    (setq osl--selected-buffer nil)
+    (run-with-idle-timer 0 nil #'osl--check-selected-buffer)))
 
 (defun osl-store-link ()
   "Store an Org link to the current task, independent of its filename."
-  (when-let ((task (osl--buffer-task)))
+  (when-let* ((task (osl--buffer-task)))
     (org-link-store-props :type "osl" :link (concat "osl:" (car task))
                           :description (cadr task))))
 
@@ -121,13 +240,20 @@ STATE defaults to the configured capture column."
 
 (defun osl-protocol-open (info)
   "Return the task file from org-protocol INFO for normal server display."
-  (osl-resolve (osl--reference-number (plist-get info :reference))))
+  (osl--resolve-for-visit (osl--reference-number (plist-get info :reference))))
 
 (define-minor-mode osl-task-mode
   "Permanent OSL link commands in task buffers.
 Bind commands in `osl-task-mode-map' in the user's configuration."
   :lighter " OSL"
-  :keymap (make-sparse-keymap))
+  :keymap (make-sparse-keymap)
+  (if osl-task-mode
+      (progn
+        (osl--remember-task)
+        (add-hook 'write-contents-functions #'osl--before-write nil t)
+        (add-hook 'after-save-hook #'osl--remember-task nil t))
+    (remove-hook 'write-contents-functions #'osl--before-write t)
+    (remove-hook 'after-save-hook #'osl--remember-task t)))
 
 (defun osl--enable-task-mode ()
   "Enable OSL integration only for canonical task files."
@@ -156,6 +282,8 @@ Bind commands in `osl-task-mode-map' in the user's configuration."
 (add-hook 'find-file-hook #'osl--enable-task-mode)
 (dolist (buffer (buffer-list))
   (with-current-buffer buffer (osl--enable-task-mode)))
+(add-hook 'buffer-list-update-hook #'osl--check-selected-buffer)
+(add-function :after after-focus-change-function #'osl--focus-change)
 
 (provide 'osl)
 ;;; osl.el ends here
