@@ -80,6 +80,9 @@
 (setq-default fill-column 80)
 (auto-fill-mode)
 
+;; Let Evil's gf recognize file paths containing spaces.
+(setq ffap-file-name-with-spaces t)
+
 ;;; ------------------------------------------------------------
 ;;; Window management.
 (require 'vi--windows)
