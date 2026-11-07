@@ -451,9 +451,9 @@ then
 fi
 
 . ~/.bashrc-teach
-# Host-specific config; tracked in dotfiles under .config/hostname/<hostname>/
-if [ -f ~/.config/hostname/$HOSTNAME/bashrc ]; then
-    . ~/.config/hostname/$HOSTNAME/bashrc
+# Host-specific config; tracked in the private repo under hostname/<hostname>/
+if [ -f "$HOME/.priv/hostname/$HOSTNAME/bashrc" ]; then
+    . "$HOME/.priv/hostname/$HOSTNAME/bashrc"
 fi
 # These are supposed to be really small; they are not git-controlled.
 if [ -f ~/.bashrc-local ]; then
