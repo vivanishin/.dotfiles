@@ -114,7 +114,8 @@ STATE defaults to the configured capture column."
 
 (defun osl--reconcile-buffer (&optional filename)
   "Follow a verified external move to FILENAME, or resolve the remembered ID.
-Signal a user error on conflicts; leave buffer text and unsaved edits intact."
+Refresh changed disk contents in a clean buffer.  Signal a user error on
+conflicts, leaving unsaved edits intact."
   (when (and osl--task-number buffer-file-name
              (equal buffer-file-name osl--task-file-name)
              (not (file-exists-p buffer-file-name)))
@@ -133,21 +134,21 @@ Signal a user error on conflicts; leave buffer text and unsaved edits intact."
           (unless (eq other (current-buffer))
             (user-error "OSL: %s already visits the destination; resolve both buffers"
                         (buffer-name other))))
-        (let ((text (save-restriction
-                      (widen)
-                      (buffer-substring-no-properties (point-min) (point-max))))
-              (version (osl--file-version target))
-              (coding-system-for-read buffer-file-coding-system))
-          (unless (with-temp-buffer
-                    (insert-file-contents target)
-                    (equal text (buffer-string)))
-            (user-error "OSL osl:%s moved and changed on disk; compare with %s"
-                        osl--task-number target))
+        (let* ((text (save-restriction
+                       (widen)
+                       (buffer-substring-no-properties (point-min) (point-max))))
+               (version (osl--file-version target))
+               (coding-system-for-read buffer-file-coding-system)
+               (changed (with-temp-buffer
+                          (insert-file-contents target)
+                          (not (equal text (buffer-string))))))
           (unless (and (equal version (osl--file-version target))
                        (not (file-exists-p buffer-file-name)))
             (user-error "OSL: task files changed during reconciliation; retry"))
           (set-visited-file-name target nil t)
-          (set-visited-file-modtime (nth 2 version))
+          (if changed
+              (revert-buffer t t t)
+            (set-visited-file-modtime (nth 2 version)))
           (setq osl--task-file-name buffer-file-name
                 osl--move-warning nil)
           (message "OSL osl:%s now visits %s" osl--task-number target)

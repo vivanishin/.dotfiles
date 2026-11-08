@@ -345,6 +345,11 @@
     (insert "\nUnsaved edit\n")
     (let ((text (buffer-string)) (undo buffer-undo-list))
       (rename-file source target)
+      (with-temp-buffer
+        (insert-file-contents target)
+        (goto-char (point-max))
+        (insert "\nExternal edit\n")
+        (write-region (point-min) (point-max) target nil 'silent))
       (should-error (save-buffer) :type 'user-error)
       (should-error (osl-open "1") :type 'user-error)
       (should-error (osl-protocol-open '(:reference "1")) :type 'user-error)
@@ -355,9 +360,12 @@
       (should-not (file-exists-p source))
       (should-not (with-temp-buffer
                     (insert-file-contents target)
-                    (search-forward "Unsaved edit" nil t))))))
+                    (search-forward "Unsaved edit" nil t)))
+      (should (with-temp-buffer
+                (insert-file-contents target)
+                (search-forward "External edit" nil t))))))
 
-(ert-deftest osl-move-with-disk-edits-blocks-real-save ()
+(ert-deftest osl-move-with-disk-edits-refreshes-before-save ()
   (osl-test--with-movable-task
     (rename-file source target)
     (with-temp-buffer
@@ -365,14 +373,35 @@
       (goto-char (point-max))
       (insert "\nExternal edit\n")
       (write-region (point-min) (point-max) target nil 'silent))
-    (should-error (save-buffer) :type 'user-error)
-    (should (equal buffer-file-name source))
+    (save-buffer)
+    (should (equal buffer-file-name target))
     (should-not (file-exists-p source))
     (should-not (buffer-modified-p))
-    (should (with-temp-buffer
-              (insert-file-contents target)
-              (goto-char (point-min))
-              (search-forward "External edit" nil t)))))
+    (should (verify-visited-file-modtime task-buffer))
+    (should (equal (buffer-string)
+                   (with-temp-buffer
+                     (insert-file-contents target)
+                     (buffer-string))))
+    (should (search-forward "External edit" nil t))))
+
+(ert-deftest osl-move-with-disk-edits-reuses-buffer-when-opened ()
+  (osl-test--with-movable-task
+    (rename-file source target)
+    (with-temp-buffer
+      (insert-file-contents target)
+      (goto-char (point-min))
+      (search-forward "# Move test")
+      (replace-match "# Updated task" t t)
+      (write-region (point-min) (point-max) target nil 'silent))
+    (osl-open "1")
+    (should (eq (current-buffer) task-buffer))
+    (should (equal buffer-file-name target))
+    (should (equal (osl--buffer-task) '("1" "Updated task")))
+    (should-not (buffer-modified-p))
+    (should-not (file-exists-p source))
+    (let ((buffers (server-visit-files
+                    '(("org-protocol://osl?reference=osl%3A1")) nil t)))
+      (should (equal buffers (list task-buffer))))))
 
 (ert-deftest osl-move-refuses-a-second-destination-buffer ()
   (osl-test--with-movable-task
