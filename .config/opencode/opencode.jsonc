@@ -12,5 +12,6 @@
       }
     }
   },
+  "skills": ["/mnt/co/skills"],
   "model": "litellm/qwen/qwen3.8-27B-fp8"
 }
