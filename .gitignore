@@ -128,7 +128,7 @@ workspace/
 !.local/share/konsole/SolarizedLight.profile
 !.local/share/konsole/SolarizedDark.profile
 .mozilla/
-.newsrc-dribble
+.newsrc*
 .npm/
 .persistent_history
 .pki/

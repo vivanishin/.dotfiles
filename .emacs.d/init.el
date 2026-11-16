@@ -374,6 +374,7 @@ the name of FILE in the current directory, suitable for creation"
 (when (or
        (equal (system-name) "archbook")
        (equal (system-name) "vlad-optiplex")
+       (equal (system-name) "cachepad")
        (equal (system-name) "mikes"))
   (require 'init-gnus))
 
