@@ -160,6 +160,31 @@ conflicts, leaving unsaved edits intact."
   (unless osl-task-mode (user-error "This buffer is not an OSL task"))
   (osl--reconcile-buffer))
 
+(defun osl-move (column)
+  "Move the current task to COLUMN through OSL and follow its new path.
+Save and commit task edits before moving.  OSL commits the move locally,
+including card order and recurrence history; it does not push."
+  (interactive
+   (progn
+     (unless osl-task-mode (user-error "This buffer is not an OSL task"))
+     (let ((osl-directory osl--task-directory))
+       (list (completing-read "Move to column: "
+                              (alist-get 'columns (osl--config)) nil t)))))
+  (let ((osl-directory osl--task-directory))
+    (unless (and osl-task-mode osl--task-number
+                 (equal osl--task-number (car (osl--buffer-task))))
+      (user-error "OSL: current buffer must retain its task ID"))
+    (when (buffer-modified-p)
+      (user-error "OSL: save and commit task edits before moving"))
+    (osl--reconcile-buffer)
+    (unless (verify-visited-file-modtime (current-buffer))
+      (user-error "OSL: file changed on disk; revert the buffer before moving"))
+    (let ((output (unwind-protect
+                      (osl--run "move" (concat "osl:" osl--task-number)
+                                "--to" column)
+                    (osl--reconcile-buffer))))
+      (message "%s" output))))
+
 (defun osl--before-write ()
   "Reconcile before writing, allowing conflicts to abort the save."
   ;; Emacs demotes errors from before-save-hook and would save the old path.
