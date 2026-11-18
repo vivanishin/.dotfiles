@@ -23,8 +23,7 @@
   :ensure t
   :config
   (setq auto-package-update-delete-old-versions t
-        auto-package-update-interval 4)
-  (auto-package-update-maybe))
+        auto-package-update-interval 4))
 
 (require 'server)
 
@@ -38,6 +37,7 @@
                      (cdr command-line-args)))
   (message "This is the main instance (%d). Starting emacs server." (emacs-pid))
   (server-start)
+  (auto-package-update-maybe)
   (desktop-save-mode)
   (setq desktop-auto-save-timeout (* 60 20)))
 
