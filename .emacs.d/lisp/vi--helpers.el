@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;;; I chose to refer to myself as vi in elisp code since these two
 ;;; letters happen to be an abbreviation of my name.
 

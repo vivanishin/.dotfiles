@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun read-lines (filePath)
   "Return a list of lines of a file at filePath."
   (with-temp-buffer

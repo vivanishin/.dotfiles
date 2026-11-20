@@ -1,9 +1,8 @@
-;; TODO: consider enabling lexical-binding for the file.
-(require 'cl)
+;;; -*- lexical-binding: t -*-
 
 (defun balanced (command)
   "Retain window balance after operation."
-  (lexical-let ((x command))
+  (let ((x command))
     (lambda ()
       (interactive)
       (funcall x)

@@ -1,4 +1,4 @@
-;;; custom.el --- Customize settings for cachepad.
+;;; custom.el --- Customize settings for cachepad. -*- lexical-binding: t -*-
 ;;; This file is per-hostname, loaded from ~/.config/hostname/<host>/custom.el
 ;;; via init.el.
 
