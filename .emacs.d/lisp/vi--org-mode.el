@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; from http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/   ;;
 ;; function to wrap blocks of text in org templates                       ;;

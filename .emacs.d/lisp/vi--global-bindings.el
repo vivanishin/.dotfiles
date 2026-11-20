@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun vi-rename-visited-file ()
   "Rename the current file, prefilling its full name for editing."
   (interactive)
