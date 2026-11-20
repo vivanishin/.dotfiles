@@ -305,7 +305,7 @@ the name of FILE in the current directory, suitable for creation"
 
 ;;; ------------------------------------------------------------
 ;;; Giule Scheme debugging.
-(require 'guile-interaction-mode)
+;; (require 'guile-interaction-mode)
 ;(require 'gds)
 
 ;(add-to-list 'load-path "~/.emacs.d/static_packages/")
@@ -337,9 +337,9 @@ the name of FILE in the current directory, suitable for creation"
 (require 'make-mode)
 ;; Comes from cmake package (arch). TODO: require conditionally.
 (require 'cmake-mode)
-(require 'gn-mode)
-(require 'llvm-mode)
-(require 'tablegen-mode)
+;; (require 'gn-mode)
+;; (require 'llvm-mode)
+;; (require 'tablegen-mode)
 (require 'perl-mode)
 (modify-syntax-entry ?_ "w" c-mode-syntax-table)
 (modify-syntax-entry ?_ "w" c++-mode-syntax-table)
