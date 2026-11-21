@@ -664,7 +664,12 @@ c.content.javascript.clipboard = "access"
 ## still be downloaded by clicking the download button in the pdf.js
 ## viewer.
 ## Type: Bool
-# c.content.pdfjs = False # True? -- available only with the other engine..
+# 2026-11-21: qutebrowser 3.7.0 + pdfjs-legacy 6.5.438 fail to open PDFs:
+# PDF.js CSP blocks qutebrowser's inline viewer startup script.
+# Requires the upstream external-script fix, via backport or browser update:
+# https://github.com/qutebrowser/qutebrowser/issues/8966
+# Temporarily disabled:
+c.content.pdfjs = False # "available only with the other engine.."
 
 ## Enable plugins in Web pages.
 ## Type: Bool
