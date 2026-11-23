@@ -21,6 +21,8 @@ local/
 workspace/
 
 .Xauthority
+/.android/adbkey
+/.android/adbkey.pub
 .asoundrc*
 .bash_history
 .bashrc-local
