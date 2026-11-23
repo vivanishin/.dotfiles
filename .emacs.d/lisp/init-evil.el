@@ -37,6 +37,12 @@
     (kbd "C-u")     'evil-scroll-up
     (kbd "C-w C-w") 'other-window)
 
+  ;; Browse search history with arrows, like Vim's / and ? prompts.
+  ;; Search immediately so RET finishes instead of resuming isearch.
+  (setq search-ring-update t)
+  (define-key isearch-mode-map (kbd "<up>") #'isearch-ring-retreat)
+  (define-key isearch-mode-map (kbd "<down>") #'isearch-ring-advance)
+
   ;; Global bindings.
   (evil-define-key 'normal global-map (kbd "C-f")  'evil-scroll-down)
   (evil-define-key 'normal global-map (kbd "C-u")  'evil-scroll-up)
