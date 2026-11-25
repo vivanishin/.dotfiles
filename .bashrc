@@ -208,7 +208,7 @@ define_git_etc_func()
             args+=(grep --recurse-submodules -n "$user_args")
             ;;
         gl)
-            args+=(log "$user_args")
+            args+=(log --follow "$user_args")
             ;;
         gs)
             args+=(status "$user_args")
