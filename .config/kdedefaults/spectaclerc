@@ -1,0 +1,3 @@
+# Arch Linux language packs: tesseract-data-rus, tesseract-data-eng
+[General]
+ocrLanguages=rus,eng
